@@ -1,1 +1,3 @@
-module.exports = {}
+module.exports = 
+  mongo:
+    uri: "mongodb://localhost/miri-dev"

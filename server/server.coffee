@@ -1,5 +1,9 @@
 express = require "express"
+mongoose = require "mongoose"
 config = require "./config/environment"
+
+# connect to MongoDB
+mongoose.connect config.mongo.uri, config.mongo.options
 
 app = express()
 server = require("http").createServer app

@@ -18,6 +18,8 @@ class Transport
 
       socket.connectedAt = new Date
 
+      # add ondisconnect event
+
       socket.on "info", (data) ->
         console.info "[%s] %s", socket.address, JSON.stringify(data, null, 2)
 
