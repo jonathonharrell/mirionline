@@ -1,0 +1,19 @@
+{
+  "name": "MiriOnline",
+  "version": "0.0.1",
+  "description": "mirionline",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "grunt",
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathonharrell/mirionline.git"
+  },
+  "author": "Jonathon Harrell",
+  "bugs": {
+    "url": "https://github.com/jonathonharrell/mirionline/issues"
+  },
+  "homepage": "https://github.com/jonathonharrell/mirionline"
+}
