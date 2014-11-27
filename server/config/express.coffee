@@ -1,3 +1,5 @@
+'use strict'
+
 express = require "express"
 favicon = require "serve-favicon"
 compression = require "compression"

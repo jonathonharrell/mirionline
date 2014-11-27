@@ -1,3 +1,5 @@
+'use strict'
+
 express = require "express"
 mongoose = require "mongoose"
 config = require "./config/environment"

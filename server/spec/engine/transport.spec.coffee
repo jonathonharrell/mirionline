@@ -1,3 +1,5 @@
+'use strict'
+
 should = require "should"
 Transport = require "../../engine/transport"
 
