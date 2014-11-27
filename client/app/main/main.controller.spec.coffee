@@ -4,5 +4,5 @@ describe 'Controller: MainCtrl', ->
 
   beforeEach module 'mirionlineApp' 
 
-  it 'should attach a list of things to the scope', ->
+  it 'should do something (test spec)', ->
     expect(1 is 1).toBe true

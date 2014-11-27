@@ -1,5 +1,5 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.controller 'MainCtrl', ($scope, $http) ->
-  $scope.awesomeThings = []
+.controller 'MainCtrl', ($scope, socket) ->
+  $scope.stuff = ""
