@@ -2,7 +2,7 @@ path = require "path"
 _ = require "lodash"
 
 all =
-  env: process.env.NODE_ENV
+  env: process.env.NODE_ENV or "development"
   root: path.normalize __dirname + "/../../.."
   port: process.env.PORT || 9000
   mongo:
