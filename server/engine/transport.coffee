@@ -6,30 +6,31 @@
 
 'use strict'
 
+EventEmitter = require("events").EventEmitter
+
 class Transport
   constructor: (@socketio) ->
     @socketio.on "connection", (socket) ->
       # add socket to list
       socket.address = ""
-      if socket.handshake.address is not null and socket.request.connection.remotePort
+      if socket.handshake.address and socket.request.connection.remotePort
         socket.address = socket.handshake.address.address + ":" + socket.request.connection.remotePort
       else
         socket.address = process.env.DOMAIN
 
-      socket.connectedAt = new Date
+      socket.connectedAt = new Date()
 
-      # Add ondisconnect event
+      socket.on "disconnect", ->
+        console.info "[%s] DISCONNECTED", socket.address
+
       # Add init state
-      # state should also attach room (socket.join)
-      # add wildcard event that fires back to games listener with the socket and event
-
-      socket.on "info", (data) ->
-        console.info "[%s] %s", socket.address, JSON.stringify(data, null, 2)
+      # state should also attach room when necessary (socket.join)
+      
+      socket.on "msg", (e, data) ->
+        EventEmitter.emit("msg", socket, e, data);
 
       console.info '[%s] CONNECTED', socket.address
       @sockets.push socket
-
-    # init global messaging service (socketio.emit)
 
   sockets: []
 
@@ -38,6 +39,8 @@ class Transport
 
   # add method proxy broadcasting to room
   # add method proxy sending to unique user socketio.to(:id).emit()
+  # add method proxying global message
+  # add method for moving socket to players list when state change calls for it
 
 
 module.exports = exports = Transport

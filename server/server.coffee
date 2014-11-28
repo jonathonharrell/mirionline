@@ -3,7 +3,6 @@
 express = require "express"
 mongoose = require "mongoose"
 config = require "./config/environment"
-wildcard = require("socketio-wildcard")()
 
 # connect to MongoDB
 mongoose.connect config.mongo.uri, config.mongo.options
@@ -14,8 +13,6 @@ socketio = require("socket.io")(server, {
   serveClient: if config.env is "production" then false else true
   path: "/socket.io-client"
 })
-
-socketio.use wildcard # allow for wildcard listener
 
 Transport = require('./engine/transport')
 transportLayer = new Transport socketio

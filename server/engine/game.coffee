@@ -8,7 +8,7 @@ EventEmitter = require("events").EventEmitter
 class Game
 
   constructor: ->
-    EventEmitter.on "msg", (socket) ->
+    EventEmitter.on "msg", (socket, e, data) ->
       # read socket state, handle inbound message
 
   # attaches transport to the game object for outbound messages
