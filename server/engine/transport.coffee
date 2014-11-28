@@ -18,7 +18,10 @@ class Transport
 
       socket.connectedAt = new Date
 
-      # add ondisconnect event
+      # Add ondisconnect event
+      # Add init state
+      # state should also attach room (socket.join)
+      # add wildcard event that fires back to games listener with the socket and event
 
       socket.on "info", (data) ->
         console.info "[%s] %s", socket.address, JSON.stringify(data, null, 2)
@@ -26,6 +29,15 @@ class Transport
       console.info '[%s] CONNECTED', socket.address
       @sockets.push socket
 
+    # init global messaging service (socketio.emit)
+
   sockets: []
+
+  # transport should switch socket to player object by character for whisper purposes
+  players: {}
+
+  # add method proxy broadcasting to room
+  # add method proxy sending to unique user socketio.to(:id).emit()
+
 
 module.exports = exports = Transport

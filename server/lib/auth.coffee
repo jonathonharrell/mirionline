@@ -59,11 +59,11 @@ requireAuth = (token, callback, error_callback) ->
     return callback payload
 
 
-exports.getUsers = getUsers
-exports.getUser = getUser
-exports.createUser = createUser
-exports.removeUser = removeUser
-exports.verifyToken = verifyToken
+exports.getUsers       = getUsers
+exports.getUser        = getUser
+exports.createUser     = createUser
+exports.removeUser     = removeUser
+exports.verifyToken    = verifyToken
 exports.changePassword = changePassword
-exports.authenticate = authenticate
-exports.requireAuth = requireAuth
+exports.authenticate   = authenticate
+exports.requireAuth    = requireAuth
