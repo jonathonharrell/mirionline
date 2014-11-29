@@ -1,6 +1,6 @@
 {
   "name": "MiriOnline",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "mirionline",
   "main": "server/app.js",
   "scripts": {
