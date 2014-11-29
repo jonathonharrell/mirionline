@@ -6,10 +6,8 @@
 
 'use strict'
 
-EventEmitter = require("events").EventEmitter
-
 class Transport
-  constructor: (@socketio) ->
+  constructor: (@socketio, @eventEmitter) ->
     @socketio.on "connection", (socket) ->
       # add socket to list
       socket.address = ""
@@ -27,7 +25,7 @@ class Transport
       # state should also attach room when necessary (socket.join)
       
       socket.on "msg", (e, data) ->
-        EventEmitter.emit("msg", socket, e, data);
+        eventEmitter.emit("msg", socket, e, data);
 
       console.info '[%s] CONNECTED', socket.address
       @sockets.push socket

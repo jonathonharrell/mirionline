@@ -14,9 +14,22 @@ socketio = require("socket.io")(server, {
   path: "/socket.io-client"
 })
 
+EventEmitter = require("events").EventEmitter
+eventEmitter = new EventEmitter()
+
+Game = require './engine/game'
+game = new Game(eventEmitter)
+
 Transport = require('./engine/transport')
-transportLayer = new Transport socketio
+transportLayer = new Transport socketio, eventEmitter
 require("./config/express")(app)
+
+# bootstrap static routes
+app.route('/:url(api|auth|components|app|bower_components|assets)/*').get (req, res) ->
+  res.sendStatus 404
+
+app.route('/*').get (req, res) ->
+  res.sendfile app.get('appPath') + '/index.html'
 
 # init game, attach transport layer
 

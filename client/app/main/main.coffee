@@ -7,3 +7,4 @@ angular.module 'mirionlineApp'
     url: '/'
     templateUrl: 'app/main/main.html'
     controller: 'MainCtrl'
+    authenticate: true

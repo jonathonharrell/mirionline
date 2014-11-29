@@ -35,7 +35,7 @@ verifyToken = (token, callback) ->
 # Update password for account
 changePassword = (id, oldPassword, newPassword, callback) ->
   User.findById id, (err, user) ->
-    return callback new Error "Invalid permissions" unless user.authenticate(oldPassword)
+    return callback { message: "Invalid permissions" } unless user.authenticate(oldPassword)
 
     user.password = newPassword
     user.save (err, user) ->
@@ -46,8 +46,8 @@ changePassword = (id, oldPassword, newPassword, callback) ->
 authenticate = (email, password, callback) ->
   User.findOne { email: email.toLowerCase() }, (err, user) ->
     return callback err if err
-    return callback new Error "Invalid credentials" unless user
-    return callback new Error "Invalid credentials" unless user.authenticate password
+    return callback { message: "Invalid credentials" } unless user
+    return callback { message: "Invalid credentials" } unless user.authenticate password
 
     token = jwt.sign { _id: user._id }, config.secrets.session, config.session.options
     return callback null, token

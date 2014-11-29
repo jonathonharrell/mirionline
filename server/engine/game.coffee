@@ -3,14 +3,17 @@
 
 'use strict'
 
-EventEmitter = require("events").EventEmitter
+auth = require "../lib/auth"
 
 class Game
-
-  constructor: ->
-    EventEmitter.on "msg", (socket, e, data) ->
+  constructor: (@eventEmitter) ->
+    @eventEmitter.on "msg", (socket, e, data) ->
       # read socket state, handle inbound message
-
+      console.info "%s %s", e, data
+      # temp
+      if e is "login"
+        auth.authenticate data.email, data.password, (err, token) ->
+          socket.emit "authToken", err, token
   # attaches transport to the game object for outbound messages
   setTransport: (@transport) ->
 
@@ -20,3 +23,5 @@ class Game
   # start the main game loop
   start: ->
     # init AI, make sure to be checking transport for active rooms
+
+module.exports = Game

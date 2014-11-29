@@ -16,3 +16,4 @@ Start on login and signup layouts
 Start on character select and create UIs
 Create States for unauthenticated, authenticated, and playing
 Add testing for transport layer and game loop
+Forgot password method added to auth client/server
