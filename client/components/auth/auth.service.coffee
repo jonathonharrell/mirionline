@@ -25,11 +25,12 @@ angular.module "mirionlineApp"
 
   # Create a new user
   createUser: (user, callback) ->
-    socket.socket.send 'signup', user
+    data = {user: user}
+    socket.socket.send 'signup', data
 
-    socket.socket.on 'authToken', (data) ->
-      return callback? data.err if data.err
-      $cookieStore.put 'token', data.token
+    socket.socket.on 'authToken', (err, token) ->
+      return callback? err if err
+      $cookieStore.put 'token', token
       currentUser = User.get token
       callback?()
 

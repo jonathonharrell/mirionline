@@ -11,9 +11,15 @@ class Game
       # read socket state, handle inbound message
       console.info "%s %s", e, data
       # temp
+      # in the future this needs to pass to socket.state.handle(e, data)
       if e is "login"
         auth.authenticate data.email, data.password, (err, token) ->
           socket.emit "authToken", err, token
+
+      if e is "signup"
+        auth.createUser data.user, (err, token) ->
+          socket.emit "authToken", err, token
+
   # attaches transport to the game object for outbound messages
   setTransport: (@transport) ->
 

@@ -60,6 +60,7 @@ UserSchema
         return respond false
 
       respond true
+  , "The specified email address is already in use."
 
 # Pre save
 UserSchema
