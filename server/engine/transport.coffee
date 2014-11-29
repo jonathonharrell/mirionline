@@ -1,10 +1,12 @@
-# require auth lib, set on connect/disconnect events, should add to player list
+# set on connect/disconnect events, should add to player list
 # should contain an attached list of sockets with IDs (game@transport.emitTo(:id, :message))
 # should proxy broadcast and other socketio methods
 # should concern itself with room subs and broadcast according to game commands accordingly
 # list of rooms?
 
 'use strict'
+
+Unauthenticated = require "./states/unauthenticated"
 
 class Transport
   constructor: (@socketio, @eventEmitter) ->
@@ -21,7 +23,8 @@ class Transport
       socket.on "disconnect", ->
         console.info "[%s] DISCONNECTED", socket.address
 
-      # Add init state
+      # handle setting to authenticated if token is passed for connection
+      socket.state = new Unauthenticated(socket)
       # state should also attach room when necessary (socket.join)
       
       socket.on "msg", (e, data) ->

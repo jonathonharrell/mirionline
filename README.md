@@ -13,7 +13,7 @@ Before next major release bump:
 ## @todo
 
 Refine login and signup layouts
-Move temp events from Game listener to State (Unauthenticated)
+Get Authenticated state bootstrapped and available
 Start on character select and create UIs
 Create States for unauthenticated, authenticated, and playing
 Add testing for transport layer and game loop
