@@ -55,7 +55,7 @@ describe "Auth library", ->
             should.exist user._id
             done()
 
-    it "should not throw an exception for no user found", (done) ->
+    it "should return nothing for no user found", (done) ->
       auth.getUser "41224d776a326fb40f000001", (err, user) ->
         should.not.exist err
         should.not.exist user
