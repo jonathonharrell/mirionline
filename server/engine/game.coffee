@@ -20,6 +20,11 @@ class Game
         auth.createUser data.user, (err, token) ->
           socket.emit "authToken", err, token
 
+      if e is "getUser"
+        auth.verifyToken data, (err, payload) ->
+          auth.getUser payload._id, (err, user) ->
+            socket.emit "user", err, user
+
   # attaches transport to the game object for outbound messages
   setTransport: (@transport) ->
 

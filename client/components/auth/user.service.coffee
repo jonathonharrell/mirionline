@@ -4,12 +4,11 @@ angular.module "mirionlineApp"
 .factory "User", (socket, $q) ->
 
   get: (token) ->
+    deferred = $q.defer()
     socket.socket.send "getUser", token
 
-    deferred = $q.defer()
-
-    socket.socket.on "user", (data) ->
-      deferred.reject data.err if data.err or not data.user
-      deferred.resolve data.user if data.user
+    socket.socket.on "user", (err, user) ->
+      deferred.reject err if err or not user
+      deferred.resolve user if user
 
     deferred.promise

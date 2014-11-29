@@ -19,7 +19,7 @@ createUser = (user, callback) ->
 
 # proxy over user model findById method
 getUser = (id, callback) ->
-  User.findById id, callback
+  User.findById id, "-salt -hashedPassword", callback
 
 # remove a user and return an error if a callback is provided
 # admin only

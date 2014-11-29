@@ -3,7 +3,11 @@
 angular.module "mirionlineApp"
 .factory "Auth", ($cookieStore, User, socket) ->
   token = $cookieStore.get("token") or null
-  currentUser = if token then User.get token else {}
+  currentUser = {}
+  promise = if token then User.get token else {}
+  if promise['then']
+    promise.then (user) ->
+      currentUser = user
 
   # Authenticate user and save token
   login: (user, callback) ->
@@ -14,7 +18,9 @@ angular.module "mirionlineApp"
     socket.socket.on 'authToken', (err, token) ->
       return callback? err if err
       $cookieStore.put 'token', token
-      currentUser = User.get token
+      promise = User.get token
+      promise.then (user) ->
+        currentUser = user
       callback?()
 
   # remove user token
@@ -31,7 +37,9 @@ angular.module "mirionlineApp"
     socket.socket.on 'authToken', (err, token) ->
       return callback? err if err
       $cookieStore.put 'token', token
-      currentUser = User.get token
+      promise = User.get token
+      promise.then (user) ->
+        currentUser = user
       callback?()
 
   # Change Password
@@ -48,13 +56,10 @@ angular.module "mirionlineApp"
 
   # Waits for currentUser to resolve before checking if user is logged in
   isLoggedInAsync: (callback) ->
-    if currentUser.hasOwnProperty '$promise'
-      currentUser.$promise.then ->
+    if promise.hasOwnProperty '$$state'
+      promise.then ->
         callback? true
-        return
-      .catch ->
-        callback? false
-        return
+        promise = {}
 
     else
       callback? currentUser.hasOwnProperty 'role'
