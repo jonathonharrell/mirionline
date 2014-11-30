@@ -63,7 +63,7 @@ module.exports = (grunt) ->
         tasks: ["injector:css"]
 
       mochaTest:
-        files: ["server/**/*.spec.js"]
+        files: ["server/**/*.spec.coffee"]
         tasks: [
           "env:test"
           "mochaTest"
@@ -156,7 +156,7 @@ module.exports = (grunt) ->
         options:
           jshintrc: "server/.jshintrc-spec"
 
-        src: ["server/**/*.spec.js"]
+        src: ["server/**/*.spec.coffee"]
 
       all: [
         "<%= yeoman.client %>/{app,components}/**/*.js"
@@ -452,8 +452,9 @@ module.exports = (grunt) ->
     mochaTest:
       options:
         reporter: "spec"
+        require: ["coffee-script/register"]
 
-      src: ["server/**/*.spec.js"]
+      src: ["server/**/*.spec.coffee"]
 
     env:
       test:
