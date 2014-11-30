@@ -13,6 +13,6 @@ Before next major release bump:
  - Add forgot password
  - Add confirm password: https://github.com/DaftMonk/generator-angular-fullstack/pull/484
  - Add better session longevity: https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files
- - Fix socketio connect logging: https://github.com/DaftMonk/generator-angular-fullstack/pull/563
  - DRY fix for -salt -hashedPassword: https://github.com/DaftMonk/generator-angular-fullstack/pull/618/files
  - Add mailer
+ - Start on character select

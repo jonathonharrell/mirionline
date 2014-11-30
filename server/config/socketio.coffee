@@ -29,7 +29,7 @@ module.exports = (socketio) ->
     handshake: true
 
   socketio.on "connection", (socket) ->
-    socket.address = (if socket.handshake.address isnt null then socket.handshake.address.address + ":" + socket.handshake.address.port else process.env.DOMAIN)
+    socket.address = (if (socket.handshake.address isnt null and socket.request.connection.remotePort) then socket.handshake.address.address + ":" + socket.request.connection.remotePort else process.env.DOMAIN)
     socket.connectedAt = new Date()
 
     # Call onDisconnect.
