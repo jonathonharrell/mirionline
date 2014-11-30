@@ -31,8 +31,10 @@ angular.module 'mirionlineApp', [
 
     $q.reject response
 
-.run ($rootScope, $location, Auth) ->
+.run ($rootScope, Auth, $state) ->
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$stateChangeStart', (event, next) ->
     Auth.isLoggedInAsync (loggedIn) ->
-      $location.path "/login" if next.authenticate and not loggedIn
+      if next.authenticate and not loggedIn and next.name isnt "login"
+        event.preventDefault()
+        $state.go "login"
