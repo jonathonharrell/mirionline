@@ -15,7 +15,7 @@ Get list of users
 restriction: 'admin'
 ###
 exports.index = (req, res) ->
-  User.find {}, "-salt -hashedPassword", (err, users) ->
+  User.find {}, (err, users) ->
     return res.send 500, err if err
     res.json 200, users
 
@@ -81,7 +81,7 @@ exports.me = (req, res, next) ->
   userId = req.user._id
   User.findOne
     _id: userId
-  , "-salt -hashedPassword", (err, user) -> # don't ever give out the password or salt
+  , (err, user) -> # don't ever give out the password or salt
     return next err if err
     return res.json 401 unless user
     res.json user

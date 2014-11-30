@@ -10,7 +10,7 @@ exports.setup = (User, config) ->
   , (email, password, done) ->
     User.findOne
       email: email.toLowerCase()
-    , (err, user) ->
+    , "+salt +hashedPassword", (err, user) ->
       return done(err)  if err
       unless user
         return done(null, false,

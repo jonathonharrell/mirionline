@@ -38,6 +38,13 @@ describe "User Model", ->
       should.exist err
       done()
 
+  it "should not have salt or hashedPassword properties", (done) ->
+    user.save ->
+      User.find {email: user.email}, (err, _user) ->
+        _user.should.not.have.property "salt"
+        _user.should.not.have.property "hashedPassword"
+        done()
+
   it "should authenticate user if password is valid", ->
     user.authenticate('password').should.be.true
 

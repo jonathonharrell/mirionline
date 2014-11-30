@@ -12,9 +12,13 @@ UserSchema = new Schema
   role:
     type: String
     default: "user"
-  hashedPassword: String
+  hashedPassword: 
+    type: String
+    select: false
   provider: String
-  salt: String
+  salt: 
+    type: String
+    select: false
 
 # Virtuals
 UserSchema
