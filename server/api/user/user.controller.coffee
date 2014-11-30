@@ -42,7 +42,7 @@ exports.show = (req, res, next) ->
 
   User.findById userId, (err, user) ->
     return next err if err
-    return res.send 401 unless user
+    return res.send 404 unless user
     res.json user.profile
 
 
