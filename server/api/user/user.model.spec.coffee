@@ -6,7 +6,6 @@ User    = require "./user.model"
 
 user = new User
   provider: 'local',
-  name: 'Fake User',
   email: 'test@test.com',
   password: 'password'
 

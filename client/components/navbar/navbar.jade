@@ -20,7 +20,7 @@ section.row.row-xs-flex.top(ng-controller='NavbarCtrl')
           a(href='/login') Login
 
         li(ng-show='isLoggedIn()')
-          p.navbar-text Hello {{ getCurrentUser().name }}
+          p.navbar-text {{ getCurrentUser().email }}
 
         li(ng-show='isLoggedIn()', ng-class='{active: isActive("/settings")}')
           a(href='/settings')

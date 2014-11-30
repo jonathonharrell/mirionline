@@ -10,7 +10,6 @@ angular.module 'mirionlineApp'
     if form.$valid
       # Account created, redirect to home
       Auth.createUser
-        name: $scope.user.name
         email: $scope.user.email
         password: $scope.user.password
 

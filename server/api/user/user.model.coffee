@@ -5,7 +5,6 @@ Schema   = mongoose.Schema
 crypto   = require "crypto"
 
 UserSchema = new Schema
-  name: String
   email:
     type: String
     lowercase: true
@@ -32,7 +31,6 @@ UserSchema
 
 # Public profile information
 UserSchema.virtual("profile").get ->
-  name: @name
   role: @role
 
 # Non-sensitive info we'll be putting in the token

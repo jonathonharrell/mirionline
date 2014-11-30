@@ -10,8 +10,8 @@ Before next major release bump:
 ### @todo
  
  - Refine login / signup / change password
+ - Add mailer
  - Add forgot password
  - Add confirm password: https://github.com/DaftMonk/generator-angular-fullstack/pull/484
  - Add better session longevity: https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files
- - Add mailer
  - Start on character select
