@@ -30,11 +30,7 @@ exports.create = (req, res, next) ->
 
   newUser.save (err, user) ->
     return validationError res, err if err
-    token = jwt.sign(
-      _id: user._id
-    , config.secrets.session,
-      expiresInMinutes: 60 * 5
-    )
+    token = jwt.sign { _id: user._id }, config.secrets.session, config.jwt_options
     res.json token: token
 
 

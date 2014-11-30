@@ -37,10 +37,7 @@ hasRole = (roleRequired) ->
 
 # Returns a jwt token signed by the app secret
 signToken = (id) ->
-  jwt.sign
-    _id: id
-  , config.secrets.session,
-    expiresInMinutes: 60 * 5
+  jwt.sign { _id: id }, config.secrets.session, config.jwt_options
 
 # Set token cookie directly for oAuth strategies
 setTokenCookie = (req, res) ->
