@@ -9,3 +9,7 @@ Before next minor release bump:
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
+
+### @todo
+
+ - Move expiresInMinutes to config for JWT
