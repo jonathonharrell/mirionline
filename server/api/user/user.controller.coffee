@@ -6,19 +6,27 @@ config   = require "../../config/environment"
 jwt      = require "jsonwebtoken"
 
 
-validationError = (res, err) ->
-  res.json 422, err
+validationError = (res, statusCode) ->
+  statusCode = statusCode or 422
+  return (err) -> res.status(statusCode).json(err)
 
+handleError = (res, statusCode) ->
+  statusCode = statusCode or 500
+  return (err) -> res.send statusCode, err
+
+respondWith = (res, statusCode) ->
+  statusCode = statusCode or 200
+  return () -> res.send statusCode
 
 ###*
 Get list of users
 restriction: 'admin'
 ###
 exports.index = (req, res) ->
-  User.find {}, (err, users) ->
-    return res.send 500, err if err
-    res.json 200, users
-
+  User.findAsync {}
+    .then (users) ->
+      res.json 200, users
+    .catch handleError(res)
 
 ###*
 Creates a new user
@@ -28,11 +36,11 @@ exports.create = (req, res, next) ->
   newUser.provider = "local"
   newUser.role = "user"
 
-  newUser.save (err, user) ->
-    return validationError res, err if err
-    token = jwt.sign { _id: user._id }, config.secrets.session, config.jwt_options
-    res.json token: token
-
+  newUser.saveAsync()
+    .spread (user) ->
+      token = jwt.sign { _id: user._id }, config.secrets.session, config.jwt_options
+      res.json token: token
+    .catch validationError(res)
 
 ###*
 Get a single user
@@ -40,20 +48,21 @@ Get a single user
 exports.show = (req, res, next) ->
   userId = req.params.id
 
-  User.findById userId, (err, user) ->
-    return next err if err
-    return res.send 404 unless user
-    res.json user.profile
-
+  User.findByIdAsync(userId)
+    .then (user) ->
+      return res.send 404 unless user
+      res.json user.profile
+    .catch (err) ->
+      next err
 
 ###*
 Deletes a user
 restriction: 'admin'
 ###
 exports.destroy = (req, res) ->
-  User.findByIdAndRemove req.params.id, (err, user) ->
-    return res.send 500, err if err
-    res.send 204
+  User.findByIdAndRemoveAsync req.params.id
+    .then respondWith(res, 204)
+    .catch handleError(res)
 
 
 ###*
@@ -64,28 +73,27 @@ exports.changePassword = (req, res, next) ->
   oldPass = String req.body.oldPassword
   newPass = String req.body.newPassword
 
-  User.findById userId, (err, user) ->
-    if user.authenticate oldPass
-      user.password = newPass
-      user.save (err) ->
-        return validationError res, err if err
-        res.send 200
-    else
-      res.send 403
-
+  User.findByIdAsync userId
+    .then (user) ->
+      if user.authenticate oldPass
+        user.password = newPass
+        user.saveAsync()
+          .then respondWith res, 200
+          .catch validationError res
+      else
+        res.send 403
 
 ###*
 Get my info
 ###
 exports.me = (req, res, next) ->
   userId = req.user._id
-  User.findOne
-    _id: userId
-  , (err, user) -> # don't ever give out the password or salt
-    return next err if err
-    return res.json 401 unless user
-    res.json user
-
+  User.findOneAsync { _id: userId }
+    .then (user) ->
+      return res.status 401 unless user
+      res.json user
+    .catch (err) ->
+      next err
 
 ###*
 Authentication callback

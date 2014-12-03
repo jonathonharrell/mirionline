@@ -1,31 +1,34 @@
 # Generated on 2014-11-29 using generator-angular-fullstack 2.0.13
+
 "use strict"
+
 module.exports = (grunt) ->
   localConfig = undefined
+
   try
     localConfig = require("./server/config/local.env")
   catch e
     localConfig = {}
-  
+
   # Load grunt tasks automatically, when needed
   require("jit-grunt") grunt,
     express: "grunt-express-server"
     useminPrepare: "grunt-usemin"
     ngtemplates: "grunt-angular-templates"
     cdnify: "grunt-google-cdn"
-    injector: "grunt-asset-injector"
     buildcontrol: "grunt-build-control"
+    istanbul_check_coverage: "grunt-mocha-istanbul"
 
-  
+
   # Time how long tasks take. Can help when optimizing build times
   require("time-grunt") grunt
-  
+
   # Define the configuration for all the tasks
   grunt.initConfig
-    
+
     # Project settings
     pkg: grunt.file.readJSON("package.json")
-    yeoman: 
+    yeoman:
       # configurable paths
       client: require("./bower.json").appPath or "client"
       dist: "dist"
@@ -112,7 +115,7 @@ module.exports = (grunt) ->
         tasks: ["karma"]
 
       gruntfile:
-        files: ["Gruntfile.js"]
+        files: ["Gruntfile.coffee"]
 
       livereload:
         files: [
@@ -136,7 +139,7 @@ module.exports = (grunt) ->
           livereload: true
           nospawn: true #Without this option specified express won't be reloaded
 
-    
+
     # Make sure code styles are up to par and there are no obvious mistakes
     jshint:
       options:
@@ -149,14 +152,14 @@ module.exports = (grunt) ->
 
         src: [
           "server/**/*.js"
-          "!server/**/*.spec.js"
+          "!server/**/*.{spec,integration}.js"
         ]
 
       serverTest:
         options:
           jshintrc: "server/.jshintrc-spec"
 
-        src: ["server/**/*.spec.coffee"]
+        src: ["server/**/*.{spec,integration}.coffee"]
 
       all: [
         "<%= yeoman.client %>/{app,components}/**/*.js"
@@ -169,7 +172,19 @@ module.exports = (grunt) ->
           "<%= yeoman.client %>/{app,components}/**/*.mock.js"
         ]
 
-    
+
+    jscs:
+      options:
+        config: ".jscs.json"
+      main:
+        files:
+          src: [
+            '<%%= yeoman.client %>/app/**/*.coffee'
+            '<%%= yeoman.client %>/app/**/*.coffee'
+            'server/**/*.coffee'
+          ]
+
+
     # Empties folders to start fresh
     clean:
       dist:
@@ -186,7 +201,7 @@ module.exports = (grunt) ->
 
       server: ".tmp"
 
-    
+
     # Add vendor prefixed styles
     autoprefixer:
       options:
@@ -200,14 +215,14 @@ module.exports = (grunt) ->
           dest: ".tmp/"
         ]
 
-    
+
     # Debugging with node inspector
     "node-inspector":
       custom:
         options:
           "web-host": "localhost"
 
-    
+
     # Use nodemon to run server in debug mode with an initial breakpoint
     nodemon:
       debug:
@@ -222,7 +237,7 @@ module.exports = (grunt) ->
               console.log event.colour
               return
 
-            
+
             # opens browser on initial server start
             nodemon.on "config:update", ->
               setTimeout (->
@@ -233,7 +248,7 @@ module.exports = (grunt) ->
 
             return
 
-    
+
     # Automatically inject Bower components into the app
     wiredep:
       target:
@@ -248,7 +263,7 @@ module.exports = (grunt) ->
           /font-awesome.css/
         ]
 
-    
+
     # Renames files for browser caching purposes
     rev:
       dist:
@@ -260,7 +275,7 @@ module.exports = (grunt) ->
             "<%= yeoman.dist %>/public/assets/fonts/*"
           ]
 
-    
+
     # Reads HTML for usemin blocks to enable smart builds that automatically
     # concat, minify and revision files. Creates configurations in memory so
     # additional tasks can operate on them
@@ -269,7 +284,7 @@ module.exports = (grunt) ->
       options:
         dest: "<%= yeoman.dist %>/public"
 
-    
+
     # Performs rewrites based on rev and the useminPrepare configuration
     usemin:
       html: ["<%= yeoman.dist %>/public/{,*/}*.html"]
@@ -280,7 +295,7 @@ module.exports = (grunt) ->
           "<%= yeoman.dist %>/public"
           "<%= yeoman.dist %>/public/assets/images"
         ]
-        
+
         # This is so we update image references in our ng-templates
         patterns:
           js: [[
@@ -288,7 +303,7 @@ module.exports = (grunt) ->
             "Update the JS to reference our revved images"
           ]]
 
-    
+
     # The following *-min tasks produce minified files in the dist folder
     imagemin:
       dist:
@@ -308,7 +323,7 @@ module.exports = (grunt) ->
           dest: "<%= yeoman.dist %>/public/assets/images"
         ]
 
-    
+
     # Allow the use of non-minsafe AngularJS files. Automatically makes it
     # minsafe compatible so Uglify does not destroy the ng references
     ngAnnotate:
@@ -320,11 +335,11 @@ module.exports = (grunt) ->
           dest: ".tmp/concat"
         ]
 
-    
+
     # Package all the html partials into a single javascript payload
     ngtemplates:
       options:
-        
+
         # This should be the name of your apps angular module
         module: "mirionlineApp"
         htmlmin:
@@ -348,13 +363,13 @@ module.exports = (grunt) ->
         src: ["{app,components}/**/*.html"]
         dest: ".tmp/tmp-templates.js"
 
-    
+
     # Replace Google CDN references
     cdnify:
       dist:
         html: ["<%= yeoman.dist %>/public/*.html"]
 
-    
+
     # Copies remaining files to places other tasks can use
     copy:
       dist:
@@ -413,7 +428,7 @@ module.exports = (grunt) ->
           remote: "openshift"
           branch: "master"
 
-    
+
     # Run some tasks in parallel to speed up the build process
     concurrent:
       server: [
@@ -442,7 +457,7 @@ module.exports = (grunt) ->
         "svgmin"
       ]
 
-    
+
     # Test settings
     karma:
       unit:
@@ -452,9 +467,47 @@ module.exports = (grunt) ->
     mochaTest:
       options:
         reporter: "spec"
-        require: ["coffee-script/register"]
+        require: ["mocha.conf.js"]
+      unit:
+        src: ["server/**/*.spec.coffee"]
+      integration:
+        src: ["server/**/*.integration.coffee"]
 
-      src: ["server/**/*.spec.coffee"]
+    mocha_istanbul:
+      unit:
+        options:
+          excludes: [
+            "**/*.spec.coffee"
+            "**/*.mock.coffee"
+            "**/*.integration.coffee"
+          ]
+          reporter: "spec"
+          require: ["mocha.conf.js"]
+          mask: "**/*.spec.coffee"
+          coverageFolder: "coverage/server/unit"
+        src: "server"
+      integration:
+        options:
+          excludes: [
+            "**/*.spec.coffee"
+            "**/*.mock.coffee"
+            "**/*.integration.coffee"
+          ]
+          reporter: "spec"
+          require: ["mocha.conf.js"]
+          mask: "**/*.integration.coffee"
+          coverageFolder: "coverage/server/integration"
+        src: "server"
+
+    istanbul_check_coverage:
+      default:
+        options:
+          coverageFolder: "coverage/**"
+          check:
+            lines: 80
+            statements: 80
+            branches: 80
+            functions: 80
 
     env:
       test:
@@ -465,7 +518,7 @@ module.exports = (grunt) ->
 
       all: localConfig
 
-    
+
     # Compiles Jade to html
     jade:
       compile:
@@ -481,7 +534,7 @@ module.exports = (grunt) ->
           ext: ".html"
         ]
 
-    
+
     # Compiles CoffeeScript to JavaScript
     coffee:
       options:
@@ -500,7 +553,7 @@ module.exports = (grunt) ->
           ext: ".js"
         ]
 
-    
+
     # Compiles Stylus to CSS
     stylus:
       server:
@@ -517,7 +570,7 @@ module.exports = (grunt) ->
 
     injector:
       options: {}
-      
+
       # Inject application script files into index.html (doesn't include bower)
       scripts:
         options:
@@ -537,7 +590,7 @@ module.exports = (grunt) ->
             "!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js"
           ]]
 
-      
+
       # Inject component styl into app.styl
       stylus:
         options:
@@ -555,7 +608,7 @@ module.exports = (grunt) ->
             "!<%= yeoman.client %>/app/app.styl"
           ]
 
-      
+
       # Inject component css into index.html
       css:
         options:
@@ -570,7 +623,7 @@ module.exports = (grunt) ->
         files:
           "<%= yeoman.client %>/index.html": ["<%= yeoman.client %>/{app,components}/**/*.css"]
 
-  
+
   # Used for delaying livereload until after server has restarted
   grunt.registerTask "wait", ->
     grunt.log.ok "Waiting for server reload..."
@@ -625,17 +678,16 @@ module.exports = (grunt) ->
     grunt.log.warn "The `server` task has been deprecated. Use `grunt serve` to start a server."
     grunt.task.run ["serve"]
 
-  grunt.registerTask "test", (target) ->
+  grunt.registerTask "test", (target, option) ->
     if target is "server"
-
       grunt.task.run [
         "env:all"
         "env:test"
-        "mochaTest"
+        "mochaTest:unit"
+        "mochaTest:integration"
       ]
 
     else if target is "client"
-
       grunt.task.run [
         "clean:server"
         "env:all"
@@ -646,8 +698,33 @@ module.exports = (grunt) ->
         "karma"
       ]
 
-    else
+    else if target is "coverage"
+      if option is "unit"
+        grunt.task.run [
+          "env:all"
+          "env:test"
+          "mocha_istanbul:unit"
+        ]
 
+      else if option is "integration"
+        grunt.task.run [
+          "env:all"
+          "env:test"
+          "mocha_istanbul:integration"
+        ]
+
+      else if option is "check"
+        grunt.task.run ["istanbul_check_coverage"]
+
+      else
+        grunt.task.run [
+          "env:all"
+          "env:test"
+          "mocha_istanbul"
+          "istanbul_check_coverage"
+        ]
+
+    else
       grunt.task.run [
         "test:server"
         "test:client"

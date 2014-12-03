@@ -9,7 +9,7 @@ require "coffee-script/register"
 # Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV or "development"
 express = require "express"
-mongoose = require "mongoose"
+mongoose = require("mongoose-bird")()
 config = require "./config/environment"
 
 # Connect to database
@@ -29,9 +29,12 @@ require("./config/socketio") socketio
 require("./config/express") app
 require("./routes") app
 
-# Start server
-server.listen config.port, config.ip, ->
-  console.log "Express server listening on %d, in %s mode", config.port, app.get("env")
+startServer = ->
+  # Start server
+  server.listen config.port, config.ip, ->
+    console.log "Express server listening on %d, in %s mode", config.port, app.get("env")
+
+setImmediate startServer
 
 # Expose app
 exports = module.exports = app

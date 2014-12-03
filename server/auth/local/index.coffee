@@ -9,8 +9,8 @@ router = express.Router()
 router.post '/', (req, res, next) ->
   passport.authenticate('local', (err, user, info) ->
     error = err or info
-    return res.json 401, error if error
-    return res.json 404, {message: 'Something went wrong, please try again.'} unless user
+    return res.status(401).json error if error
+    return res.status(404).json {message: 'Something went wrong, please try again.'} unless user
 
     token = auth.signToken user._id, user.role
     res.json {token: token}
