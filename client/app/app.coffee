@@ -15,7 +15,8 @@ angular.module 'mirionlineApp', [
   $locationProvider.html5Mode true
   $httpProvider.interceptors.push 'authInterceptor'
 
-.factory 'authInterceptor', ($rootScope, $q, $cookieStore, $location) ->
+.factory 'authInterceptor', ($rootScope, $q, $cookieStore, $injector) ->
+  state = null
   # Add authorization token to headers
   request: (config) ->
     config.headers = config.headers or {}
@@ -25,7 +26,7 @@ angular.module 'mirionlineApp', [
   # Intercept 401s and redirect you to login
   responseError: (response) ->
     if response.status is 401
-      $location.path '/login'
+      (state || state = $injector.get '$state').go 'login'
       # remove any stale tokens
       $cookieStore.remove 'token'
 
@@ -34,7 +35,7 @@ angular.module 'mirionlineApp', [
 .run ($rootScope, Auth, $state) ->
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$stateChangeStart', (event, next) ->
-    Auth.isLoggedInAsync (loggedIn) ->
+    Auth.isLoggedIn (loggedIn) ->
       if next.authenticate and not loggedIn and next.name isnt "login"
         event.preventDefault()
         $state.go "login"

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.factory 'Auth', ($location, $rootScope, $http, User, $cookieStore, $q) ->
+.factory 'Auth', ($http, User, $cookieStore, $q) ->
   currentUser = if $cookieStore.get 'token' then User.get() else {}
 
   ###
@@ -12,23 +12,20 @@ angular.module 'mirionlineApp'
   @return {Promise}
   ###
   login: (user, callback) ->
-    deferred = $q.defer()
     $http.post '/auth/local',
       email: user.email
       password: user.password
 
-    .success (data) ->
-      $cookieStore.put 'token', data.token
+    .then (res) ->
+      $cookieStore.put 'token', res.data.token
       currentUser = User.get()
-      deferred.resolve data
       callback?()
+      res.data
 
-    .error (err) =>
+    , (err) ->
       @logout()
-      deferred.reject err
-      callback? err
-
-    deferred.promise
+      callback? err.data
+      $q.reject err.data
 
 
   ###
@@ -54,7 +51,7 @@ angular.module 'mirionlineApp'
       (data) ->
         $cookieStore.put 'token', data.token
         currentUser = User.get()
-        callback? user
+        callback? null, user
 
       , (err) =>
         @logout()
@@ -79,7 +76,7 @@ angular.module 'mirionlineApp'
       newPassword: newPassword
 
     , (user) ->
-      callback? user
+      callback? null, user
 
     , (err) ->
       callback? err
@@ -92,41 +89,48 @@ angular.module 'mirionlineApp'
 
   @return {Object} user
   ###
-  getCurrentUser: ->
-    currentUser
+  getCurrentUser: (callback) ->
+    return currentUser if arguments.length is 0
 
+    value = if (currentUser.hasOwnProperty("$promise")) then currentUser.$promise else currentUser
+    $q.when value
 
-  ###
-  Check if a user is logged in synchronously
+    .then (user) ->
+      callback? user
+      user
 
-  @return {Boolean}
-  ###
-  isLoggedIn: ->
-    currentUser.hasOwnProperty 'role'
+    , ->
+      callback? {}
+      {}
 
 
   ###
   Waits for currentUser to resolve before checking if user is logged in
   ###
-  isLoggedInAsync: (callback) ->
-    if currentUser.hasOwnProperty '$promise'
-      currentUser.$promise.then ->
-        callback? true
-        return
-      .catch ->
-        callback? false
-        return
+  isLoggedIn: (callback) ->
+    return currentUser.hasOwnProperty "role" if arguments.length is 0
 
-    else
-      callback? currentUser.hasOwnProperty 'role'
+    @getCurrentUser null
+
+    .then (user) ->
+      is_ = user.hasOwnProperty "role"
+      callback? is_
+      is_
 
   ###
   Check if a user is an admin
 
   @return {Boolean}
   ###
-  isAdmin: ->
-    currentUser.role is 'admin'
+  isAdmin: (callback) ->
+    return currentUser.role is "admin" if arguments.length is 0
+
+    @getCurrentUser null
+
+    .then (user) ->
+      is_ = user.role is "admin"
+      callback? is_
+      is_
 
 
   ###

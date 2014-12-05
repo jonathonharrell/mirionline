@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.controller 'LoginCtrl', ($scope, Auth, $location) ->
+.controller 'LoginCtrl', ($scope, Auth, $state) ->
   $scope.user = {}
   $scope.errors = {}
   $scope.login = (form) ->
@@ -14,7 +14,7 @@ angular.module 'mirionlineApp'
         password: $scope.user.password
 
       .then ->
-        $location.path '/'
+        $state.go "main"
 
       .catch (err) ->
         $scope.errors.other = err.message

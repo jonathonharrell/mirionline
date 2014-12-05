@@ -10,6 +10,3 @@ angular.module 'socketMock', []
     emit: ->
 
     receive: ->
-
-  syncUpdates: ->
-  unsyncUpdates: ->

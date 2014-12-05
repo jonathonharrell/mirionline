@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.controller 'SignupCtrl', ($scope, Auth, $location) ->
+.controller 'SignupCtrl', ($scope, Auth, $state) ->
   $scope.user = {}
   $scope.errors = {}
   $scope.register = (form) ->
@@ -14,7 +14,7 @@ angular.module 'mirionlineApp'
         password: $scope.user.password
 
       .then ->
-        $location.path '/'
+        $state.go "main"
 
       .catch (err) ->
         err = err.data
