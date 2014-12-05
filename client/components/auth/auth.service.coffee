@@ -23,7 +23,6 @@ angular.module 'mirionlineApp'
       res.data
 
     , (err) ->
-      @logout()
       callback? err.data
       $q.reject err.data
 
@@ -69,6 +68,7 @@ angular.module 'mirionlineApp'
   @return {Promise}
   ###
   changePassword: (oldPassword, newPassword, callback) ->
+    console.log "called!"
     User.changePassword
       id: currentUser._id
     ,
