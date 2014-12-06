@@ -8,7 +8,8 @@ Before next minor release bump:
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
 
-## @todo
+@todo
+=====
  
  #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service?)
