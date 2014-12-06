@@ -10,20 +10,21 @@ Before next major release bump:
 
 ## @todo
 
-I'll try to keep an up to date list of things that need to be done here
+#### Research/ideas
+ - n/a
 
- #### Functionality (server side)
+#### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service?)
  - Add forgot password (depends on mailer, new controller in /account)
  - Add better session longevity: https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files
  - Start on character select
  - More specs (specifically for client)
 
- #### Design (styles)
+#### Design (styles)
  - Color Scheme
  - Refine auth views
 
- #### Assets (images)
+#### Assets (images)
  - Parralax background for auth views
  - Logo
  - Font
