@@ -130,7 +130,7 @@ module.exports = (grunt) ->
           livereload: true
 
       express:
-        files: ["server/**/*.{js,json}"]
+        files: ["server/**/*.{js,json,coffee}"]
         tasks: [
           "express:dev"
           "wait"

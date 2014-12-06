@@ -78,6 +78,9 @@ UserSchema.methods =
 
   # Authenticate - check if the passwords are the same
   authenticate: (password, callback) ->
+    console.log password
+    console.log @encryptPassword password
+    console.log @password
     return @encryptPassword(password) is @password unless callback
 
     _this = this

@@ -73,7 +73,7 @@ exports.changePassword = (req, res, next) ->
   oldPass = String req.body.oldPassword
   newPass = String req.body.newPassword
 
-  User.findByIdAsync userId
+  User.findByIdAsync userId, "+salt +password"
     .then (user) ->
       if user.authenticate oldPass
         user.password = newPass
