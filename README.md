@@ -10,6 +10,7 @@ Before next major release bump:
 
 @todo
 =====
+
  
  #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service?)
