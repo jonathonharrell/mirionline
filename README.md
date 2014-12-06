@@ -9,9 +9,7 @@ Before next major release bump:
  - Able to log in, create character, see some amount of UI
 
 @todo
-=====
 
- 
  #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service?)
  - Add forgot password (depends on mailer, new controller in /account)
