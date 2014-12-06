@@ -10,6 +10,11 @@ angular.module 'mirionlineApp'
       params:
         controller: 'password'
 
+    changeEmail:
+      method: 'PUT'
+      params:
+        controller: 'email'
+
     get:
       method: 'GET'
       params:

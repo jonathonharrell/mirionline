@@ -25,6 +25,14 @@ div(ng-include='"components/navbar/navbar.html"')
           p.help-block(ng-show='form.password.$error.mongoose')
             | {{ errors.password }}
 
+        .form-group(ng-class='{ "has-success": form.passwordConfirm.$valid && submitted,\
+        "has-error": form.passwordConfirm.$invalid && submitted }')
+          label(for="passwordConfirm") Confirm Password
+          input.form-control#passwordConfirm(type='password', name='passwordConfirm', ng-model='passwordConfirm', ng-minlength='3', required='', mongoose-error='\
+          ' ng-confirm-field="", confirm-against="user.password")
+          p.help-block(ng-show='form.passwordConfirm.$error.noMatch && submitted')
+            | Passwords must match.
+
         div
           button.btn.btn-inverse.btn-lg.btn-login(type='submit')
             | Sign up

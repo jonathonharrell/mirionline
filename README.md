@@ -13,8 +13,5 @@ Before next major release bump:
  - Refine login / signup / change password layouts
  - Add mailer
  - Add forgot password
- - Add change email to settings
- - Add confirm password: https://github.com/DaftMonk/generator-angular-fullstack/pull/484
- - Readd mongo session store
  - Add better session longevity: https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files
  - Start on character select

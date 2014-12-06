@@ -69,19 +69,31 @@ exports.destroy = (req, res) ->
 Change a users password
 ###
 exports.changePassword = (req, res, next) ->
-  userId = req.user._id
   oldPass = String req.body.oldPassword
   newPass = String req.body.newPassword
 
-  User.findByIdAsync userId, "+salt +password"
+  User.findByIdAsync req.user._id, "+salt +password"
     .then (user) ->
       if user.authenticate oldPass
         user.password = newPass
         user.saveAsync()
-          .then respondWith res, 200
+          .then respondWith res, 204
           .catch validationError res
       else
         res.send 403
+
+###*
+ * Change a users email
+###
+exports.changeEmail = (req, res, next) ->
+  newEmail = String req.body.email
+
+  User.findByIdAsync req.user._id
+    .then (user) ->
+      user.email = newEmail
+      user.saveAsync()
+        .then respondWith res, 204
+        .catch validationError res
 
 ###*
 Get my info

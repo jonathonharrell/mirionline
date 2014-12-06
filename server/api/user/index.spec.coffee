@@ -7,6 +7,7 @@ userCtrlStub =
   destroy: "userCtrl.destroy"
   me: "userCtrl.me"
   changePassword: "userCtrl.changePassword"
+  changeEmail: "userCtrl.changeEmail"
   show: "userCtrl.show"
   create: "userCtrl.create"
 
@@ -60,6 +61,12 @@ describe "User API Router:", ->
     it "should be authenticated and route to user.controller.changePassword", ->
       routerStub.put
         .withArgs("/:id/password", "authService.isAuthenticated", "userCtrl.changePassword")
+        .should.have.been.calledOnce
+
+  describe "PUT /api/users/:id/email", ->
+    it "should be authenticated and route to user.controller.changeEmail", ->
+      routerStub.put
+        .withArgs "/:id/email", "authService.isAuthenticated", "userCtrl.changeEmail"
         .should.have.been.calledOnce
 
 

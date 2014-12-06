@@ -68,7 +68,6 @@ angular.module 'mirionlineApp'
   @return {Promise}
   ###
   changePassword: (oldPassword, newPassword, callback) ->
-    console.log "called!"
     User.changePassword
       id: currentUser._id
     ,
@@ -76,6 +75,25 @@ angular.module 'mirionlineApp'
       newPassword: newPassword
 
     , (user) ->
+      callback? null, user
+
+    , (err) ->
+      callback? err
+
+    .$promise
+
+
+  ###*
+   * Change email
+  ###
+  changeEmail: (email, callback) ->
+    User.changeEmail
+      id: currentUser._id
+    ,
+      email: email
+
+    , () ->
+      currentUser.email = email
       callback? null, user
 
     , (err) ->
