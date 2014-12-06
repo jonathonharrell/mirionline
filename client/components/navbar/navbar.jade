@@ -6,7 +6,7 @@ section.row.row-xs-flex.top(ng-controller='NavbarCtrl')
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='/') Miri Online
+      a.navbar-brand(ui-sref='main') Miri Online
     div#navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
       ul.nav.navbar-nav
         li(ng-show='isAdmin()', ui-sref-active='active')
