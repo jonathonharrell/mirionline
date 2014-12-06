@@ -28,15 +28,14 @@ div(ng-include='"components/navbar/navbar.html"')
             | {{ errors.other }}
         .form-group
           label(for="newPass") New Password
-          input.form-control#newPass(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='')
+          input.form-control#newPass(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='', ng-show="!showPassword")
+          input.form-control(type='text', ng-model='user.newPassword', ng-show="showPassword")
           p.help-block(ng-show='(pwdForm.newPassword.$error.minlength || pwdForm.newPassword.$error.required) && (pwdForm.newPassword.$dirty || pwdSubmitted)')
             | Password must be at least 3 characters.
-        .form-group
-          label(for="passwordConfirm") Confirm New Password
-          input.form-control#passwordConfirm(type='password', name='passwordConfirm', ng-model='passwordConfirm', ng-minlength='3', required='\
-          ', ng-confirm-field='', confirm-against="user.newPassword")
-          p.help-block(ng-show='pwdForm.passwordConfirm.$error.noMatch && pwdSubmitted')
-            | Passwords must match.
+        .checkbox
+          label(for="showPassword")
+            input#showPassword(type="checkbox", ng-model="showPassword")
+            | Show Password
 
 
         p.help-block  {{ pwdMessage }}

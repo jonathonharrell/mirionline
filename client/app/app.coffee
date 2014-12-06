@@ -6,8 +6,7 @@ angular.module 'mirionlineApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap',
-  'ng.confirmField'
+  'ui.bootstrap'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider

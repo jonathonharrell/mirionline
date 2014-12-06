@@ -15,7 +15,6 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service or smtp)
- - Replace confirm password with "Show Password" to check password is what the user wants
  - Add ng-password-strength
  - Add "Receive News checkbox" to signup and settings
  - Add forgot password [PR](https://github.com/DaftMonk/modular-fs/pull/20/files)
