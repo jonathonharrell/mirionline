@@ -6,7 +6,7 @@ div(ng-include='"components/navbar/navbar.html"')
     .col-sm-12
       form(role='form', name='emailForm', ng-submit='changeEmail(emailForm)', novalidate='')
         .form-group.has-feedback
-          label(for="email") Current Email
+          label(for="email") New Email
           input.form-control#email(type='email', name='email', ng-model='user.email', placeholder='ex. me@awesome.com')
           p.help-block(ng-show='!emailForm.email.$valid && emailSubmitted && !emailForm.email.$error.mongoose')
             | Email not valid

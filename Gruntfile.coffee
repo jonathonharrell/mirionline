@@ -179,8 +179,8 @@ module.exports = (grunt) ->
       main:
         files:
           src: [
-            '<%%= yeoman.client %>/app/**/*.coffee'
-            '<%%= yeoman.client %>/app/**/*.coffee'
+            '<%= yeoman.client %>/app/**/*.coffee'
+            '<%= yeoman.client %>/app/**/*.coffee'
             'server/**/*.coffee'
           ]
 

@@ -15,8 +15,8 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service?)
- - Add forgot password (depends on mailer, new controller in /account)
- - Add better session longevity: https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files
+ - Add forgot password [PR](https://github.com/DaftMonk/modular-fs/pull/20/files)
+ - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
  - More specs (specifically for client)
 
@@ -28,3 +28,6 @@ Before next major release bump:
  - Parralax background for auth views
  - Logo
  - Font
+
+#### Thoughts
+ - Get e2e tests back in action ? (low priority)
