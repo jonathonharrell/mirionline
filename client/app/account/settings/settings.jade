@@ -1,9 +1,12 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
-    .col-sm-12
+    .col-sm-4
+    .col-sm-4
       h1 Email
-    .col-sm-12
+  .row
+    .col-sm-4
+    .col-sm-4
       form(role='form', name='emailForm', ng-submit='changeEmail(emailForm)', novalidate='')
         .form-group.has-feedback
           label(for="email") New Email
@@ -17,9 +20,12 @@ div(ng-include='"components/navbar/navbar.html"')
 
         button.btn.btn-lg.btn-primary(type='submit') Save changes
   .row
-    .col-sm-12
+    .col-sm-4
+    .col-sm-4
       h1 Change Password
-    .col-sm-12
+  .row
+    .col-sm-4
+    .col-sm-4
       form.form(name='pwdForm', role='form', ng-submit='changePassword(pwdForm)', novalidate='')
         .form-group
           label(for="oldPass") Current Password
@@ -28,8 +34,12 @@ div(ng-include='"components/navbar/navbar.html"')
             | {{ errors.other }}
         .form-group
           label(for="newPass") New Password
-          input.form-control#newPass(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='', ng-show="!showPassword")
-          input.form-control(type='text', ng-model='user.newPassword', ng-show="showPassword")
+          .row
+            .col-sm-7
+              input.form-control#newPass(type='password', name='newPassword', ng-model='user.newPassword', ng-minlength='3', required='', ng-show="!showPassword")
+              input.form-control(type='text', ng-model='user.newPassword', ng-show="showPassword")
+            .col-sm-5
+              div(password-strength="user.newPassword || ''")
           p.help-block(ng-show='(pwdForm.newPassword.$error.minlength || pwdForm.newPassword.$error.required) && (pwdForm.newPassword.$dirty || pwdSubmitted)')
             | Password must be at least 3 characters.
         .checkbox

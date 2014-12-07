@@ -15,7 +15,6 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service or smtp)
- - Add ng-password-strength
  - Add "Receive News checkbox" to signup and settings
  - Add forgot password [PR](https://github.com/DaftMonk/modular-fs/pull/20/files)
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
