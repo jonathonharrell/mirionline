@@ -11,7 +11,7 @@ Before next major release bump:
 ## @todo
 
 #### Research
- - n/a
+ - Captcha, email verification or other bot / spam prevention
 
 #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service or smtp)
@@ -36,4 +36,3 @@ Before next major release bump:
  - Add social signup / login (Twitter / Facebook / Google+)
  - Two factor auth for local (email, SMS)
  - Add "Receive News checkbox" to settings / signup (assuming we want to send news out)
- - Add email verification (prevent access beyond tutorial without verification)
