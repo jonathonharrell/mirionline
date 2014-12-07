@@ -39,8 +39,6 @@ angular.module 'mirionlineApp'
       total = characters + capitals + lowercase + number + special
       percent = ((total / 5) * 100).toFixed 0
 
-      console.log percent
-
       strengths = ["Very Weak", "Very Weak", "Weak", "Medium", "Strong", "Very Strong"]
       classes = ["default", "danger", "danger", "warning", "success", "primary"]
 
