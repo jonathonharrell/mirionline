@@ -11,11 +11,10 @@ Before next major release bump:
 ## @todo
 
 #### Research
- - Captcha, email verification or other bot / spam prevention
+ - n/a
 
 #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service or smtp)
- - Add "Receive News checkbox" to settings
  - Add forgot password [PR](https://github.com/DaftMonk/modular-fs/pull/20/files)
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
@@ -36,3 +35,5 @@ Before next major release bump:
 #### Long Term
  - Add social signup / login (Twitter / Facebook / Google+)
  - Two factor auth for local (email, SMS)
+ - Add "Receive News checkbox" to settings / signup (assuming we want to send news out)
+ - Add email verification (prevent access beyond tutorial without verification)
