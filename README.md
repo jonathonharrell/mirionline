@@ -2,8 +2,8 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - Remove unneeded boilerplate
- - Auth wired up
+ - Forgot password
+ - Refine layout
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
