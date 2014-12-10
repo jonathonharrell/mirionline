@@ -5,11 +5,9 @@ angular.module 'mirionlineApp'
   $scope.errors = {}
 
   $scope.changeEmail = (form) ->
-    console.log "called"
     $scope.emailSubmitted = true
 
     if form.$valid
-      console.log "valid"
       Auth.changeEmail $scope.user.email
       .then ->
         $scope.emailMessage = 'Email successfully changed.'

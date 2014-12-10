@@ -3,36 +3,41 @@ div(ng-include='"components/navbar/navbar.html"')
   .row
     .col-sm-4
     .col-sm-4
-      h1 Email
+      h1 Change Email
+      hr
   .row
     .col-sm-4
     .col-sm-4
-      form(role='form', name='emailForm', ng-submit='changeEmail(emailForm)', novalidate='')
-        .form-group.has-feedback
+      form.form(role='form', name='emailForm', ng-submit='changeEmail(emailForm)', novalidate='')
+        .form-group(ng-class='{ "has-success": emailForm.email.$valid && emailSubmitted,\
+        "has-error": (emailForm.email.$error.mongoose || emailForm.email.$error.required || emailForm.email.$error.email ) && emailSubmitted }')
           label(for="email") New Email
-          input.form-control#email(type='email', name='email', ng-model='user.email', placeholder='ex. me@awesome.com')
-          p.help-block(ng-show='!emailForm.email.$valid && emailSubmitted && !emailForm.email.$error.mongoose')
+          input.form-control#email(type='email', name='email', ng-model='user.email', placeholder='ex. me@awesome.com', mongoose-error='', required='')
+          p.help-block(ng-show='(emailForm.email.$error.required || emailForm.email.$error.email) && emailSubmitted && !emailForm.email.$error.mongoose')
             | Email not valid
           p.help-block(ng-show='emailForm.email.$error.mongoose')
             | {{ errors.email }}
 
         p.help-block  {{ emailMessage }}
-
-        button.btn.btn-lg.btn-primary(type='submit') Save changes
+        button.btn.btn-lg.btn-primary(type='submit') Save
+        div(style="padding-bottom:30px")
   .row
     .col-sm-4
     .col-sm-4
       h1 Change Password
+      hr
   .row
     .col-sm-4
     .col-sm-4
       form.form(name='pwdForm', role='form', ng-submit='changePassword(pwdForm)', novalidate='')
-        .form-group
+        .form-group(ng-class='{ "has-success": pwdForm.password.$valid && pwdSubmitted,\
+        "has-error": !pwdForm.password.$valid && pwdSubmitted }')
           label(for="oldPass") Current Password
-          input.form-control#oldPass(type='password', name='password', ng-model='user.oldPassword', mongoose-error='')
+          input.form-control#oldPass(type='password', name='password', ng-model='user.oldPassword', mongoose-error='', required='')
           p.help-block(ng-show='pwdForm.password.$error.mongoose')
             | {{ errors.other }}
-        .form-group
+        .form-group(ng-class='{ "has-success": pwdForm.newPassword.$valid && pwdSubmitted,\
+        "has-error": !pwdForm.newPassword.$valid && pwdSubmitted }')
           label(for="newPass") New Password
           .row
             .col-sm-7
@@ -48,6 +53,6 @@ div(ng-include='"components/navbar/navbar.html"')
             | Show Password
 
 
-        p.help-block  {{ pwdMessage }}
+        p.help-block.has-success {{ pwdMessage }}
 
-        button.btn.btn-lg.btn-primary(type='submit') Save changes
+        button.btn.btn-lg.btn-primary(type='submit') Save

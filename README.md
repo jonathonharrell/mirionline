@@ -12,6 +12,8 @@ Before next major release bump:
 
 #### Research
  - Captcha, email verification or other bot / spam prevention
+ - Clustering
+ - Scale
 
 #### Functionality (server side)
  - Add mailer (nodemailer, mail-preview, service or smtp)
