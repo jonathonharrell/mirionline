@@ -8,6 +8,8 @@ userCtrlStub =
   me: "userCtrl.me"
   changePassword: "userCtrl.changePassword"
   changeEmail: "userCtrl.changeEmail"
+  resetPassword: "userCtrl.resetPassword"
+  forgotPassword: "userCtrl.forgotPassword"
   show: "userCtrl.show"
   create: "userCtrl.create"
 
@@ -57,6 +59,18 @@ describe "User API Router:", ->
         .withArgs("/me", "authService.isAuthenticated", "userCtrl.me")
         .should.have.been.calledOnce
 
+  describe "POST /api/users/forgot", ->
+    it "should route to user.controller.forgotPassword", ->
+      routerStub.post
+        .withArgs("/forgot", "userCtrl.forgotPassword")
+        .should.have.been.calledOnce
+
+  describe "PUT /api/users/reset/:resetToken", ->
+    it "should route to user.controller.resetPassword", ->
+      routerStub.put
+        .withArgs("/reset/:resetToken", "userCtrl.resetPassword")
+        .should.have.been.calledOnce
+
   describe "PUT /api/users/:id/password", ->
     it "should be authenticated and route to user.controller.changePassword", ->
       routerStub.put
@@ -68,7 +82,6 @@ describe "User API Router:", ->
       routerStub.put
         .withArgs "/:id/email", "authService.isAuthenticated", "userCtrl.changeEmail"
         .should.have.been.calledOnce
-
 
   describe "GET /api/users/:id", ->
     it "should be authenticated and route to user.controller.show", ->
