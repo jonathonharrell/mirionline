@@ -42,3 +42,18 @@ describe "User Model", ->
         user.should.not.have.property "salt"
         user.should.not.have.property "password"
         done()
+
+  it "should generate a reset password token on request", ->
+    user.generateResetPasswordToken()
+    user.should.have.property "resetPasswordToken"
+    user.should.have.property "resetPasswordSent"
+
+  it "should validate against a reset password token", ->
+    res = user.checkResetToken(user.resetPasswordToken)
+    res.should.be.true
+
+  it "should fail to validate reset token when the token has expired", ->
+    HOUR = 60 * 60 * 1000
+    user.resetPasswordSent = new Date((new Date()).getTime() - (HOUR * 4))
+    res = user.checkResetToken user.resetPasswordToken
+    res.should.be.false

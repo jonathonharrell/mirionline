@@ -6,7 +6,7 @@ describe "Email transport", ->
 
   m = undefined
   e =
-    template: "registered"
+    template: "welcome"
     to: "test@test.com"
     locals:
       user: {}

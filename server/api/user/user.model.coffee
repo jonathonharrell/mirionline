@@ -18,6 +18,12 @@ UserSchema = new Schema
   salt:
     type: String
     select: false
+  resetPasswordToken:
+    type: String
+    select: false
+  resetPasswordExpiry:
+    type: Date
+    select: false
 
 # Virtuals
 
@@ -118,6 +124,20 @@ UserSchema.methods =
     crypto.pbkdf2 password, salt, defaultIterations, defaultKeyLength, (err, key) ->
       return callback err if err
       callback null, key.toString "base64"
+
+  # Generate reset password token and set created at
+  generateResetPasswordToken: ->
+    uniqueString = -> ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)
+    @resetPasswordToken = uniqueString() + uniqueString() + uniqueString() + uniqueString()
+    @resetPasswordSent = new Date()
+    return
+
+  # Check if reset token is still valid
+  checkResetToken: (token, callback) ->
+    HOUR = 60 * 60 * 1000
+    dateValid = ((new Date) - @resetPasswordSent) < (HOUR * 3)
+    return (token is @resetPasswordToken and dateValid) unless callback
+    callback (token is @resetPasswordToken and dateValid)
 
 
 module.exports = mongoose.model "User", UserSchema

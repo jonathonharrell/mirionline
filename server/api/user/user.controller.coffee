@@ -39,7 +39,7 @@ exports.create = (req, res, next) ->
   newUser.saveAsync()
     .spread (user) ->
       req.mailer.sendMessage
-        template: 'registered'
+        template: 'welcome'
         to: user.email
         subject: 'Welcome to Miri Online'
         locals:
@@ -88,6 +88,27 @@ exports.changePassword = (req, res, next) ->
           .catch validationError res
       else
         res.send 403
+
+###*
+ * Forgot Password (set reset password token on user)
+###
+exports.forgotPassword = (req, res, next) ->
+  User.findAsync { email: req.body.email }
+    .then (user) ->
+      return res.send 404 unless user
+
+      user.generateResetPasswordToken()
+      req.mailer.sendMessage
+        template: 'forgotpassword'
+        to: user.email
+        subject: 'Miri Online - Reset Password'
+        locals:
+          user: user
+
+      user.saveAsync()
+        .then respondWith res, 201
+        .catch validationError res
+
 
 ###*
  * Change a users email

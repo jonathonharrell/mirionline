@@ -29,9 +29,12 @@ module.exports = (env) ->
 
   transport.sendMessage = (options, callback) ->
     try
-      render = jade.compile fs.readFileSync(path.join(templateDir, options.template + ".jade"), "utf-8")
+      file = path.join templateDir, options.template + ".jade"
+      render = jade.compile fs.readFileSync(file, "utf-8"), { filename: file }
+
       html   = render(options.locals or {})
     catch e
+      console.error e
       return callback? e, null
 
     email  =
@@ -48,7 +51,7 @@ module.exports = (env) ->
         # not too worried about if this is async friendly or not, since it's dev only
 
         render = jade.compile fs.readFileSync(path.join(__dirname, "views", "email.preview.jade"), "utf-8")
-        save   = render { message: data.response.toString().replace(/(?:\r\n|\r|\n)/g, "<br/>") }
+        save   = render { message: data.response.toString() }
 
         dir = path.join(config.root, ".tmp", "mail", (new Date).toISOString().replace(/[-:TZ\.]/g, ''))
         mkdirp.sync dir

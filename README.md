@@ -21,6 +21,7 @@ Before next major release bump:
    - No auth needed
    - resetPasswordToken, resetPasswordExpiry
    - Views on frontend for forgotPassword, resetPassword
+   - Update specs
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
  - More specs (specifically for client)
@@ -33,8 +34,7 @@ Before next major release bump:
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
 
 #### Design (styles)
- - Add email template
- - Add welcome email
+ - Refine email template and welcome email
  - Color Scheme
 
 #### Assets (images)
