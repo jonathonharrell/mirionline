@@ -93,7 +93,7 @@ exports.changePassword = (req, res, next) ->
  * Forgot Password (set reset password token on user)
 ###
 exports.forgotPassword = (req, res, next) ->
-  User.findAsync { email: req.body.email }
+  User.findAsync { email: req.body.email }, "+resetPasswordToken +resetPasswordSent"
     .then (user) ->
       return res.send 404 unless user
 
@@ -109,6 +109,19 @@ exports.forgotPassword = (req, res, next) ->
         .then respondWith res, 201
         .catch validationError res
 
+###*
+ * Reset password based on token
+###
+exports.resetPassword = (req, res, next) ->
+  User.findByIdAsync req.params.resetToken, "+salt +password +resetPasswordToken +resetPasswordSent"
+    .then (user) ->
+      if user.checkResetToken req.params.token
+        user.password = req.body.newPassword
+        user.saveAsync()
+          .then respondWith res, 204
+          .catch validationError res
+      else
+        res.send 403
 
 ###*
  * Change a users email
