@@ -99,7 +99,7 @@ exports.forgotPassword = (req, res, next) ->
 
       user.generateResetPasswordToken()
       req.mailer.sendMessage
-        template: 'forgotpassword'
+        template: 'forgot-password'
         to: user.email
         subject: 'Miri Online - Reset Password'
         locals:
