@@ -16,7 +16,6 @@ Before next major release bump:
  - Scale
 
 #### Functionality (server side)
- - Add tests for email (cleanup code a bit) (move core to lib)
  - Add forgot password
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select

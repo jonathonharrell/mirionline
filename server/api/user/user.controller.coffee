@@ -40,10 +40,10 @@ exports.create = (req, res, next) ->
     .spread (user) ->
       req.mailer.sendMessage
         template: 'registered'
-        to: 'kaos78414@yahoo.com'
+        to: user.email
         subject: 'Welcome to Miri Online'
-      ,
-        user: user
+        locals:
+          user: user
 
       token = jwt.sign { _id: user._id }, config.secrets.session, config.jwt_options
       res.json token: token
