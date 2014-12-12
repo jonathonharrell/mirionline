@@ -27,6 +27,7 @@ socketio = require("socket.io")(server,
 )
 require("./config/socketio") socketio
 require("./config/express") app
+require("./config/nodemailer") app
 require("./routes") app
 
 startServer = ->

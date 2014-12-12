@@ -11,3 +11,7 @@ module.exports =
   # MongoDB connection options
   mongo:
     uri: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL or 'mongodb://localhost/mirionline'
+
+  sendgrid:
+    user: 'kaos78414'
+    key: 'rDJFQ5UGycy5wUF'

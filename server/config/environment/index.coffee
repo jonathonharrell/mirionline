@@ -36,5 +36,9 @@ all =
   jwt_options:
     expiresInMinutes: 60 * 5
 
+  sendgrid:
+    user: ''
+    key: ''
+
 # Export the config object based on the NODE_ENV
 module.exports = _.merge(all, require("./" + process.env.NODE_ENV + ".coffee") or {})
