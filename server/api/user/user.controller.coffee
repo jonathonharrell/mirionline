@@ -38,6 +38,13 @@ exports.create = (req, res, next) ->
 
   newUser.saveAsync()
     .spread (user) ->
+      req.mailer.sendMessage
+        template: 'registered'
+        to: 'kaos78414@yahoo.com'
+        subject: 'Welcome to Miri Online'
+      ,
+        user: user
+
       token = jwt.sign { _id: user._id }, config.secrets.session, config.jwt_options
       res.json token: token
     .catch validationError(res)

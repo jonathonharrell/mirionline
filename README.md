@@ -16,8 +16,7 @@ Before next major release bump:
  - Scale
 
 #### Functionality (server side)
- - Add mailer transports (stub for dev/test, service for production)
- - Add tests for email
+ - Add tests for email (cleanup code a bit) (move core to lib)
  - Add forgot password
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
@@ -31,8 +30,9 @@ Before next major release bump:
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
 
 #### Design (styles)
+ - Add email template
+ - Add welcome email
  - Color Scheme
- - Refine auth views
 
 #### Assets (images)
  - Parralax background for auth views
