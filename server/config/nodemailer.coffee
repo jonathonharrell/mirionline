@@ -2,7 +2,7 @@
 
 'use strict'
 
-mailer = require "../lib/email"
+mailer = require "../lib/email.service"
 
 module.exports = (app) ->
   # attach mailer to app request object

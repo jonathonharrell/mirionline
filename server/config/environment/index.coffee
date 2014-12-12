@@ -40,5 +40,8 @@ all =
     user: ''
     key: ''
 
+  email:
+    from: 'no-reply@minimiri.com'
+
 # Export the config object based on the NODE_ENV
 module.exports = _.merge(all, require("./" + process.env.NODE_ENV + ".coffee") or {})

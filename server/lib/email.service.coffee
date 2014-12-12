@@ -8,7 +8,7 @@ jade   = require "jade"
 fs     = require "fs"
 open   = require "open"
 mkdirp = require "mkdirp"
-config = require "../../config/environment"
+config = require "../config/environment"
 
 sgOptions =
   auth:
@@ -25,7 +25,7 @@ module.exports = (env) ->
   transport = mailer.createTransport stubTransport() if env isnt "production"
   transport.use htmlToText()
 
-  templateDir = path.join __dirname, "views"
+  templateDir = path.join __dirname, "views", "email"
 
   transport.sendMessage = (options, callback) ->
     try
@@ -47,7 +47,7 @@ module.exports = (env) ->
         # open a preview of the message
         # not too worried about if this is async friendly or not, since it's dev only
 
-        render = jade.compile fs.readFileSync(path.join(__dirname, "email.preview.jade"), "utf-8")
+        render = jade.compile fs.readFileSync(path.join(__dirname, "views", "email.preview.jade"), "utf-8")
         save   = render { message: data.response.toString().replace(/(?:\r\n|\r|\n)/g, "<br/>") }
 
         dir = path.join(config.root, ".tmp", "mail", (new Date).toISOString().replace(/[-:TZ\.]/g, ''))

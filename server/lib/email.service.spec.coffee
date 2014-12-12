@@ -1,6 +1,6 @@
 'use strict'
 
-mailer = require "./"
+mailer = require "./email.service"
 
 describe "Email transport", ->
 
