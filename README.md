@@ -3,7 +3,7 @@ Miri Online
 
 Before next minor release bump:
  - Forgot password
- - Refine layout
+ - Welcome Email
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -17,6 +17,10 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Add forgot password
+   - forgotPassword, resetPassword/:token controller methods
+   - No auth needed
+   - resetPasswordToken, resetPasswordExpiry
+   - Views on frontend for forgotPassword, resetPassword
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
  - More specs (specifically for client)
