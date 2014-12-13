@@ -2,7 +2,6 @@ Miri Online
 ===========
 
 Before next minor release bump:
-- Refine emails
 - Email unsubscribe
 
 Before next major release bump:
@@ -20,7 +19,7 @@ Before next major release bump:
  - Start on character select
  - More specs (specifically for client)
  - Add created_at / updated_at to user model (created at default to now, updated at pre-save hook)
- - Add "showTutorials" flag to user model
+ - Add "showTutorials" flag to user model (part of joyride)
  - Add more logging fields to user record (lastLoggedIn, currentLoggedIn, IP address logging, timestamps)
    - Add hooks to save to those fields
  - Email unsubscribe (receiveEmail flag for user)
@@ -30,7 +29,6 @@ Before next major release bump:
  - Specs for account section controllers
 
 #### Design (styles)
- - Refine email templates and layouts
  - Color Scheme
 
 #### Assets (images)
@@ -46,8 +44,9 @@ Before next major release bump:
  - Add social signup / login (Twitter / Facebook / Google+)
  - Two factor auth for local (email, SMS)
  - Add "Receive News checkbox" to settings / signup (assuming we want to send news out)
- - Admin tools to limit logins to beta users
+ - Admin tools to limit logins to beta users, and manage user accounts
  - Better prevention of abuse of forgot password form
+ - Support section
 
 
 ## Tools and Accounts
