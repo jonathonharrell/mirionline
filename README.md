@@ -31,7 +31,6 @@ Before next major release bump:
 
 #### Bugs
  - Logout should disconnect from socket
- - Change password current password field not showing required error
 
 #### Design (styles)
  - Color Scheme
