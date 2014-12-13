@@ -2,7 +2,6 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - Forgot password
  - Welcome Email
 
 Before next major release bump:
@@ -16,8 +15,6 @@ Before next major release bump:
  - Scale
 
 #### Functionality (server side)
- - Add forgot password
-   - Client ctrl for reset password
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
  - More specs (specifically for client)
