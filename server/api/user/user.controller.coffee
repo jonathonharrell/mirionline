@@ -8,15 +8,15 @@ jwt      = require "jsonwebtoken"
 
 validationError = (res, statusCode) ->
   statusCode = statusCode or 422
-  return (err) -> res.status(statusCode).json(err)
+  return (err) -> res.status(statusCode).json(err).end()
 
 handleError = (res, statusCode) ->
   statusCode = statusCode or 500
-  return (err) -> res.send statusCode, err
+  return (err) -> res.status(statusCode).json(err).end()
 
 respondWith = (res, statusCode) ->
   statusCode = statusCode or 200
-  return () -> res.send statusCode
+  return () -> res.status(statusCode).end()
 
 ###*
 Get list of users
@@ -57,7 +57,7 @@ exports.show = (req, res, next) ->
 
   User.findByIdAsync(userId)
     .then (user) ->
-      return res.send 404 unless user
+      return res.status(404).end() unless user
       res.json user.profile
     .catch (err) ->
       next err
@@ -87,15 +87,15 @@ exports.changePassword = (req, res, next) ->
           .then respondWith res, 204
           .catch validationError res
       else
-        res.send 403
+        res.status(403).end()
 
 ###*
  * Forgot Password (set reset password token on user)
 ###
 exports.forgotPassword = (req, res, next) ->
-  User.findAsync { email: req.body.email }, "+resetPasswordToken +resetPasswordSent"
+  User.findOneAsync { email: req.body.email }, "+resetPasswordToken +resetPasswordSent"
     .then (user) ->
-      return res.send 404 unless user
+      return res.status(404).end() unless user
 
       user.generateResetPasswordToken()
       req.mailer.sendMessage
@@ -113,7 +113,7 @@ exports.forgotPassword = (req, res, next) ->
  * Reset password based on token
 ###
 exports.resetPassword = (req, res, next) ->
-  User.findByIdAsync req.params.resetToken, "+salt +password +resetPasswordToken +resetPasswordSent"
+  User.findOneAsync { resetPasswordToken: req.params.resetToken }, "+salt +password +resetPasswordToken +resetPasswordSent"
     .then (user) ->
       if user.checkResetToken req.params.token
         user.password = req.body.newPassword
@@ -121,7 +121,7 @@ exports.resetPassword = (req, res, next) ->
           .then respondWith res, 204
           .catch validationError res
       else
-        res.send 403
+        res.status(403).end()
 
 ###*
  * Change a users email

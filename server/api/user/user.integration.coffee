@@ -51,3 +51,24 @@ describe "User API:", ->
         .get "/api/users/me"
         .expect 401
         .end done
+
+  describe "POST /api/users/forgot", ->
+
+    it "should respond with a 201 when the user is found", (done) ->
+      request app
+        .post "/api/users/forgot"
+        .send { email: "test@test.com" }
+        .expect 201
+        .end done
+
+    it "should respond with a 404 when the user is not found", (done) ->
+      request app
+        .post "/api/users/forgot"
+        .send { email: "fake-email@test.com" }
+        .expect 404
+        .end done
+
+  describe "PUT /api/users/reset/:resetToken", ->
+
+    it "should respond with a 204 for a successful update", ->
+    it "should respond with a 403 if the reset token is invalid", ->

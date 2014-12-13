@@ -19,7 +19,7 @@ isAuthenticated = ->
   ).use (req, res, next) -> # Attach user to request
     User.findByIdAsync req.user._id
       .then (user) ->
-        return res.send 401 unless user
+        return res.status(401).end() unless user
         req.user = user
         next()
       .catch (err) ->
@@ -33,7 +33,7 @@ hasRole = (roleRequired) ->
     if config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)
       next()
     else
-      res.send 403
+      res.status(403).end()
 
 # Returns a jwt token signed by the app secret
 signToken = (id) ->

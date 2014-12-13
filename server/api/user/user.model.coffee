@@ -21,7 +21,7 @@ UserSchema = new Schema
   resetPasswordToken:
     type: String
     select: false
-  resetPasswordExpiry:
+  resetPasswordSent:
     type: Date
     select: false
 
