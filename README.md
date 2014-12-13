@@ -27,6 +27,11 @@ Before next major release bump:
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
  - Specs for account section controllers
+ - Add email settings to settings page
+
+#### Bugs
+ - Logout should disconnect from socket
+ - Change password current password field not showing required error
 
 #### Design (styles)
  - Color Scheme
