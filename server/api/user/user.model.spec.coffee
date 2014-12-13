@@ -35,15 +35,9 @@ describe "User Model", ->
   it "should not authenticate user if password is invalid", ->
     user.authenticate('blah').should.not.be.true
 
-  it "should not have salt or password properties", (done) ->
-    user.email = 'test@test.com' # reset user email
-    user.saveAsync().then (newUser) ->
-      User.findAsync(newUser._id).then (user) ->
-        user.should.not.have.property "salt"
-        user.should.not.have.property "password"
-        done()
-
   it "should generate a reset password token on request", ->
+    user.should.not.have.property "resetPasswordToken"
+    user.should.not.have.property "resetPasswordSent"
     user.generateResetPasswordToken()
     user.should.have.property "resetPasswordToken"
     user.should.have.property "resetPasswordSent"
@@ -57,3 +51,14 @@ describe "User Model", ->
     user.resetPasswordSent = new Date((new Date()).getTime() - (HOUR * 4))
     res = user.checkResetToken user.resetPasswordToken
     res.should.be.false
+
+  it "should keep track of last update and created dates", (done) ->
+    user.created.should.exist
+    user.updated.should.exist
+    oldUpdated = user.updated
+    user.email = 'test2@test.com'
+
+    user.saveAsync()
+      .spread (user) ->
+        user.updated.should.not.equal oldUpdated
+        done()

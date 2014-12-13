@@ -24,6 +24,10 @@ UserSchema = new Schema
   resetPasswordSent:
     type: Date
     select: false
+  created:
+    type: Date
+    default: Date.now
+  updated: Date
 
 # Virtuals
 
@@ -64,6 +68,8 @@ validatePresenceOf = (value) ->
 
 # Pre-save hook
 UserSchema.pre "save", (next) ->
+  @updated = new Date()
+
   if @password
     return next new Error("Invalid password") unless validatePresenceOf(@password)
 

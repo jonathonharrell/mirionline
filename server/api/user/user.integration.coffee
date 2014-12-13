@@ -43,6 +43,9 @@ describe "User API:", ->
         .expect 200
         .expect "Content-Type", /json/
         .end (err, res) ->
+          # it should not contain salt, or other sensitive properties
+          res.body.should.not.have.property "salt"
+          res.body.should.not.have.property "password"
           res.body._id.toString().should.equal user._id.toString()
           done()
 

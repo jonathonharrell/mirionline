@@ -18,7 +18,6 @@ Before next major release bump:
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
  - More specs (specifically for client)
- - Add created_at / updated_at to user model (created at default to now, updated at pre-save hook)
  - Add "showTutorials" flag to user model (part of joyride)
  - Add more logging fields to user record (lastLoggedIn, currentLoggedIn, IP address logging, timestamps)
    - Add hooks to save to those fields
