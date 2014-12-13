@@ -52,3 +52,4 @@ Before next major release bump:
 
 ## Tools and Accounts
  - Email: Sendgrid
+ - Public issues: [here](https://github.com/jonathonharrell/mirionline-issues/issues)
