@@ -2,7 +2,8 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - Welcome Email
+- Refine emails
+- Email unsubscribe
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -22,7 +23,7 @@ Before next major release bump:
  - Add "showTutorials" flag to user model
  - Add more logging fields to user record (lastLoggedIn, currentLoggedIn, IP address logging, timestamps)
    - Add hooks to save to those fields
- - Email unsubscribe
+ - Email unsubscribe (receiveEmail flag for user)
 
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
