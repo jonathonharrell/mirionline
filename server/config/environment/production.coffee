@@ -15,3 +15,5 @@ module.exports =
   sendgrid:
     user: 'kaos78414'
     key: 'rDJFQ5UGycy5wUF'
+
+  baseUrl: 'http://minimiri.com'

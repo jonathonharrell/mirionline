@@ -28,11 +28,15 @@ module.exports = (env) ->
   templateDir = path.join __dirname, "views", "email"
 
   transport.sendMessage = (options, callback) ->
+    # bootstrap baseUrl to local variables
+    options.locals = options.locals or {}
+    options.locals.baseUrl = config.baseUrl
+
     try
       file = path.join templateDir, options.template + ".jade"
       render = jade.compile fs.readFileSync(file, "utf-8"), { filename: file }
 
-      html   = render(options.locals or {})
+      html   = render(options.locals)
     catch e
       console.error e
       return callback? e, null

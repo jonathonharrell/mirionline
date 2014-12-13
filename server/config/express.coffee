@@ -13,6 +13,8 @@ errorHandler   = require "errorhandler"
 path           = require "path"
 config         = require "./environment"
 passport       = require "passport"
+csrf           = require "csurf"
+session        = require "express-session"
 
 module.exports = (app) ->
   env = app.get "env"
@@ -23,8 +25,22 @@ module.exports = (app) ->
   app.use bodyParser.urlencoded({ extended: false })
   app.use bodyParser.json()
   app.use methodOverride()
-  app.use cookieParser()
+  app.use cookieParser(config.secrets.session)
   app.use passport.initialize()
+
+  # CSRF protection
+  if env isnt "test"
+    app.use session({
+      cookie:
+        path: '/'
+        secure: false
+        maxAge: 360000 * 24
+        httpOnly: true
+    })
+    app.use csrf()
+    app.use (req, res, next) ->
+      res.cookie 'XSRF-TOKEN', req.csrfToken()
+      next()
 
   if env is "production"
     app.use favicon(path.join(config.root, "public", "favicon.ico"))

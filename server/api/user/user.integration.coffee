@@ -70,5 +70,17 @@ describe "User API:", ->
 
   describe "PUT /api/users/reset/:resetToken", ->
 
-    it "should respond with a 204 for a successful update", ->
-    it "should respond with a 403 if the reset token is invalid", ->
+    it "should respond with a 404 if the reset token is invalid", (done) ->
+      request app
+        .put "/api/users/reset/not-a-real-token"
+        .expect 404
+        .end done
+
+    it "should respond with a 204 for a successful update", (done) ->
+      User.findOneAsync { email: "test@test.com" }, "+resetPasswordToken"
+        .then (user) ->
+          request app
+            .put "/api/users/reset/" + user.resetPasswordToken
+            .send { newPassword: "whatever" }
+            .expect 204
+            .end done

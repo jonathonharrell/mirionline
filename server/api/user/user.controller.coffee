@@ -115,13 +115,15 @@ exports.forgotPassword = (req, res, next) ->
 exports.resetPassword = (req, res, next) ->
   User.findOneAsync { resetPasswordToken: req.params.resetToken }, "+salt +password +resetPasswordToken +resetPasswordSent"
     .then (user) ->
-      if user.checkResetToken req.params.token
+      return res.status(404).end() unless user
+
+      if user.checkResetToken req.params.resetToken
         user.password = req.body.newPassword
         user.saveAsync()
           .then respondWith res, 204
           .catch validationError res
       else
-        res.status(403).end()
+        res.status(403).json({error: "Reset token expired."}).end()
 
 ###*
  * Change a users email

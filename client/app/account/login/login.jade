@@ -23,6 +23,9 @@ div(ng-include='"components/navbar/navbar.html"')
             | Please enter your email and password.
           p.help-block {{ errors.other }}
 
+        p
+          a(ui-sref='forgot_password') Forgot your password?
+
         hr
         div
           button.btn.btn-primary.btn-lg.btn-login(type='submit')

@@ -17,6 +17,9 @@ all =
   # Server port
   port: process.env.PORT or 9000
 
+  # Base URL (passed as global to email templates)
+  baseUrl: 'http://localhost:9000'
+
   # Should we populate the DB with sample data?
   seedDB: false
 

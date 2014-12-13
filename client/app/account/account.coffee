@@ -27,6 +27,16 @@ angular.module 'mirionlineApp'
     controller: 'SettingsCtrl'
     authenticate: true
 
+  .state 'forgot_password',
+    url: '/forgotpassword'
+    templateUrl: 'app/account/forgot_password/forgot_password.html'
+    controller: 'ForgotPasswordCtrl'
+
+  .state 'reset_password',
+    url: '/resetpassword/:resetToken'
+    templateUrl: 'app/account/reset_password/reset_password.html'
+    controller: 'ResetPasswordCtrl'
+
 .run ($rootScope) ->
   $rootScope.$on '$stateChangeStart', (event, next, nextParams, current) ->
     next.referrer = current.name if next.name is "logout" and current and current.name and not current.authenticate

@@ -17,8 +17,7 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Add forgot password
-   - Views on frontend for forgotPassword, resetPassword
-   - Update controller spec with expected responses
+   - Client ctrl for reset password
  - Add better session longevity [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
  - Start on character select
  - More specs (specifically for client)
@@ -26,9 +25,11 @@ Before next major release bump:
  - Add "showTutorials" flag to user model
  - Add more logging fields to user record (lastLoggedIn, currentLoggedIn, IP address logging, timestamps)
    - Add hooks to save to those fields
+ - Email unsubscribe
 
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
+ - Specs for account section controllers
 
 #### Design (styles)
  - Refine email templates and layouts
@@ -41,12 +42,14 @@ Before next major release bump:
 
 #### Thoughts
  - Get e2e tests back in action ? (low priority)
+ - Use JSON web token to verify unsubscribe
 
 #### Long Term
  - Add social signup / login (Twitter / Facebook / Google+)
  - Two factor auth for local (email, SMS)
  - Add "Receive News checkbox" to settings / signup (assuming we want to send news out)
  - Admin tools to limit logins to beta users
+ - Better prevention of abuse of forgot password form
 
 
 ## Tools and Accounts
