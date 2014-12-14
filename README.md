@@ -2,8 +2,8 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - Writeup some preliminary terms / policies (use simple language)
  - User IP logging/tracking login times
+ - Separate out footer and header so we're not calling them from every template
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -24,11 +24,10 @@ Before next major release bump:
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
  - Specs for account section controllers
- - Terms of use
- - Privacy policy
 
 #### Bugs
  - Logout should disconnect from socket
+ - Dist/production: Injector task not removing unneeded script calls
 
 #### Design
  - Color Scheme
