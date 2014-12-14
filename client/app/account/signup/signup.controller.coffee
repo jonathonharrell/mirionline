@@ -5,27 +5,29 @@ angular.module 'mirionlineApp'
   $scope.user = {}
   $scope.errors = {}
 
-  $scope.terms = ->
-    Static.open 'terms'
-
   $scope.register = (form) ->
     $scope.submitted = true
 
     if form.$valid
-      # Account created, redirect to home
-      Auth.createUser
-        email: $scope.user.email
-        password: $scope.user.password
+      # check if the user agrees to the terms
+      Static.open 'terms-agree'
+      .then (agreed) ->
+        return unless agreed
 
-      .then ->
-        $state.go "main"
+        Auth.createUser
+          email: $scope.user.email
+          password: $scope.user.password
 
-      .catch (err) ->
-        err = err.data
-        $scope.errors = {}
+        .then ->
+          # Account created, redirect to home
+          $state.go "main"
 
-        # Update validity of form fields that match the mongoose errors
-        angular.forEach err.errors, (error, field) ->
-          form[field].$setValidity 'mongoose', false
-          $scope.errors[field] = error.message
+        .catch (err) ->
+          err = err.data
+          $scope.errors = {}
+
+          # Update validity of form fields that match the mongoose errors
+          angular.forEach err.errors, (error, field) ->
+            form[field].$setValidity 'mongoose', false
+            $scope.errors[field] = error.message
 

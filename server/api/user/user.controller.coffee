@@ -8,11 +8,11 @@ jwt      = require "jsonwebtoken"
 
 validationError = (res, statusCode) ->
   statusCode = statusCode or 422
-  return (err) -> res.status(statusCode).json(err).end()
+  return (err) -> res.status(statusCode).json err
 
 handleError = (res, statusCode) ->
   statusCode = statusCode or 500
-  return (err) -> res.status(statusCode).json(err).end()
+  return (err) -> res.status(statusCode).json err
 
 respondWith = (res, statusCode) ->
   statusCode = statusCode or 200
@@ -123,7 +123,7 @@ exports.resetPassword = (req, res, next) ->
           .then respondWith res, 204
           .catch validationError res
       else
-        res.status(403).json({error: "Reset token expired."}).end()
+        res.status(403).json({error: "Reset token expired."})
 
 ###*
  * Change a users email

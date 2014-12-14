@@ -2,7 +2,6 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - Terms opt-in for signup (client only)
  - Writeup some preliminary terms / policies (use simple language)
  - User IP logging/tracking login times
 
@@ -25,7 +24,7 @@ Before next major release bump:
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
  - Specs for account section controllers
- - Terms of use and opt-in
+ - Terms of use
  - Privacy policy
 
 #### Bugs
@@ -33,7 +32,6 @@ Before next major release bump:
 
 #### Design
  - Color Scheme
- - Modal design
  - Separate out footer and header so we're not calling them from every template
 
 #### Assets

@@ -3,8 +3,8 @@
 angular.module 'mirionlineApp'
 .factory 'Static', ($modal) ->
 
-  open: (page, callback) ->
+  open: (page) ->
     $modal.open
       templateUrl: 'components/static/' + page + '.html'
       size: 'lg'
-      resolve: callback
+    .result
