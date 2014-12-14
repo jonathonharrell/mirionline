@@ -1,30 +1,31 @@
-section.row.row-xs-flex.top(ng-controller='NavbarCtrl')
-  .col-xs-12
-    div.navbar-header
-      button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(ui-sref='main') Miri Online
-    div#navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
-      ul.nav.navbar-nav
-        li(ng-show='isAdmin()', ui-sref-active='active')
-          a(ui-sref='admin') Admin
+.container-fluid
+  section.row(ng-controller='NavbarCtrl')
+    .col-xs-12
+      div.navbar-header
+        button.navbar-toggle(type='button', ng-click='isCollapsed = !isCollapsed')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(ui-sref='main') Miri Online
+      div#navbar-main.navbar-collapse.collapse(collapse='isCollapsed')
+        ul.nav.navbar-nav
+          li(ng-show='isAdmin()', ui-sref-active='active')
+            a(ui-sref='admin') Admin
 
-      ul.nav.navbar-nav.navbar-right
-        li(ng-hide='isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='signup') Sign up
+        ul.nav.navbar-nav.navbar-right
+          li(ng-hide='isLoggedIn()', ui-sref-active='active')
+            a(ui-sref='signup') Sign up
 
-        li(ng-hide='isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='login') Login
+          li(ng-hide='isLoggedIn()', ui-sref-active='active')
+            a(ui-sref='login') Login
 
-        li(ng-show='isLoggedIn()')
-          p.navbar-text {{ getCurrentUser().email }}
+          li(ng-show='isLoggedIn()')
+            p.navbar-text {{ getCurrentUser().email }}
 
-        li(ng-show='isLoggedIn()', ui-sref-active='active')
-          a(ui-sref='settings')
-            span.glyphicon.glyphicon-cog
+          li(ng-show='isLoggedIn()', ui-sref-active='active')
+            a(ui-sref='settings')
+              span.glyphicon.glyphicon-cog
 
-        li(ng-show='isLoggedIn()')
-          a(ui-sref='logout') Logout
+          li(ng-show='isLoggedIn()')
+            a(ui-sref='logout') Logout

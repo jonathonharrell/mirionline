@@ -3,7 +3,6 @@ Miri Online
 
 Before next minor release bump:
  - User IP logging/tracking login times
- - Separate out footer and header so we're not calling them from every template
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -27,11 +26,9 @@ Before next major release bump:
 
 #### Bugs
  - Logout should disconnect from socket
- - Dist/production: Injector task not removing unneeded script calls (possibly windows only issue)
 
 #### Design
  - Color Scheme
- - Separate out footer and header so we're not calling them from every template
 
 #### Assets
  - Parralax background for auth views
