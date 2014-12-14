@@ -33,6 +33,8 @@ Before next major release bump:
 
 #### Design
  - Color Scheme
+ - Modal design
+ - Separate out footer and header so we're not calling them from every template
 
 #### Assets
  - Parralax background for auth views

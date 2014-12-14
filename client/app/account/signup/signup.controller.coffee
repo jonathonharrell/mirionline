@@ -1,9 +1,13 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.controller 'SignupCtrl', ($scope, Auth, $state) ->
+.controller 'SignupCtrl', ($scope, Auth, $state, Static) ->
   $scope.user = {}
   $scope.errors = {}
+
+  $scope.terms = ->
+    Static.open 'terms'
+
   $scope.register = (form) ->
     $scope.submitted = true
 
