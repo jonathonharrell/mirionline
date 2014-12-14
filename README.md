@@ -27,7 +27,7 @@ Before next major release bump:
 
 #### Bugs
  - Logout should disconnect from socket
- - Dist/production: Injector task not removing unneeded script calls
+ - Dist/production: Injector task not removing unneeded script calls (possibly windows only issue)
 
 #### Design
  - Color Scheme
