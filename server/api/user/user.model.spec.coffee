@@ -62,3 +62,18 @@ describe "User Model", ->
       .spread (user) ->
         user.updated.should.not.equal oldUpdated
         done()
+
+  describe "Account locking mechanism", ->
+
+    it "should return false for legit login attempts", ->
+      user.locked.should.be.false
+
+    it "should return true after 5 attempts within a certain timeframe", ->
+      user.lastLogin = new Date()
+      user.failedLoginAttempts = 6
+      user.locked.should.be.true
+
+    it "should allow logins after an hour of being locked", ->
+      user.lastLogin = (new Date() - 60 * 60 * 1000)
+      user.failedLoginAttempts = 6
+      user.locked.should.be.false

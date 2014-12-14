@@ -28,6 +28,13 @@ UserSchema = new Schema
     type: Date
     default: Date.now
   updated: Date
+  lastLogin:
+    type: Date
+    select: false
+  failedLoginAttempts:
+    type: Number
+    default: 0
+    select: false
 
 # Virtuals
 
@@ -39,6 +46,12 @@ UserSchema.virtual("profile").get ->
 UserSchema.virtual("token").get ->
   _id: @_id
   role: @role
+
+# Check if account is locked due to too many login attempts
+UserSchema.virtual("locked").get ->
+  HOUR = 60 * 60 * 1000
+  # too many login attempts and last attempt was less then an hour ago
+  @failedLoginAttempts > 5 and ((new Date) - @lastLogin) < (HOUR)
 
 # Validate empty email
 UserSchema.path("email").validate (email) ->

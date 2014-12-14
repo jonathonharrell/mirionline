@@ -2,7 +2,8 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - User IP logging/tracking login times
+ - tbd
+ - Fix socket issues on client
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -17,15 +18,13 @@ Before next major release bump:
  - Start on character select
  - Increase spec coverage / integration tests
  - Add "showTutorials" flag to user model (part of joyride)
- - Add more logging fields to user record (lastLoggedIn, currentLoggedIn, IP address logging, timestamps)
-   - Add hooks to save to those fields
 
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
  - Specs for account section controllers
 
 #### Bugs
- - Logging out and logging back in again should reconnect to websocket
+ - Logging out should disconnect and logging back in again should reconnect to websocket
 
 #### Design
  - Color Scheme
@@ -55,8 +54,11 @@ Before next major release bump:
      - Check out this new content!
      - Other updates
  - Remember me [PR](https://github.com/DaftMonk/generator-angular-fullstack/pull/444/files)
+ - Log time logged in (played time)
+ - Better IP/login logging for security
 
 
 ## Tools and Accounts
  - Email: Sendgrid
  - Public issues: [here](https://github.com/jonathonharrell/mirionline-issues/issues)
+ - Domain: Namecheap, minimiri.com
