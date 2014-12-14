@@ -25,7 +25,7 @@ Before next major release bump:
  - Specs for account section controllers
 
 #### Bugs
- - n/a
+ - Logging out and logging back in again should reconnect to websocket
 
 #### Design
  - Color Scheme
