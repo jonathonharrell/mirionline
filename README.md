@@ -15,7 +15,7 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Start on character select
- - More specs (specifically for client)
+ - Increase spec coverage / integration tests
  - Add "showTutorials" flag to user model (part of joyride)
  - Add more logging fields to user record (lastLoggedIn, currentLoggedIn, IP address logging, timestamps)
    - Add hooks to save to those fields
@@ -25,7 +25,7 @@ Before next major release bump:
  - Specs for account section controllers
 
 #### Bugs
- - Logout should disconnect from socket
+ - n/a
 
 #### Design
  - Color Scheme
@@ -41,7 +41,9 @@ Before next major release bump:
 #### Long Term
  - Add social signup / login (Twitter / Facebook / Google+)
  - Two factor auth for local (email, SMS)
- - Admin tools to limit logins to beta users, and manage user accounts
+ - Admin tools
+   - "Beta mode" - limit logins to users flagged for beta use (may not need to be a clientside tool)
+   - Manage user accounts and view details (IP logs, etc)
  - Better prevention of abuse of forgot password form
  - Support section (account/customer service/help)
  - Email unsubscribe

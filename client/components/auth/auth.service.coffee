@@ -4,13 +4,7 @@ angular.module 'mirionlineApp'
 .factory 'Auth', ($http, User, $cookieStore, $q) ->
   currentUser = if $cookieStore.get 'token' then User.get() else {}
 
-  ###
-  Authenticate user and save token
-
-  @param  {Object}   user     - login info
-  @param  {Function} callback - optional
-  @return {Promise}
-  ###
+  # Authenticate user and save token
   login: (user, callback) ->
     $http.post '/auth/local',
       email: user.email
@@ -26,25 +20,14 @@ angular.module 'mirionlineApp'
       callback? err.data
       $q.reject err.data
 
-
-  ###
-  Delete access token and user info
-
-  @param  {Function}
-  ###
+  # Delete access token and user info
   logout: ->
+    currentUser.socket.disconnect() if currentUser.socket
     $cookieStore.remove 'token'
     currentUser = {}
     return
 
-
-  ###
-  Create a new user
-
-  @param  {Object}   user     - user info
-  @param  {Function} callback - optional
-  @return {Promise}
-  ###
+  # Create a new user
   createUser: (user, callback) ->
     User.save user,
       (data) ->
@@ -58,15 +41,7 @@ angular.module 'mirionlineApp'
 
     .$promise
 
-
-  ###
-  Change password
-
-  @param  {String}   oldPassword
-  @param  {String}   newPassword
-  @param  {Function} callback    - optional
-  @return {Promise}
-  ###
+  # Change password
   changePassword: (oldPassword, newPassword, callback) ->
     User.changePassword
       id: currentUser._id
@@ -82,10 +57,7 @@ angular.module 'mirionlineApp'
 
     .$promise
 
-
-  ###*
-   * Change email
-  ###
+  # Change email
   changeEmail: (email, callback) ->
     User.changeEmail
       id: currentUser._id
@@ -101,12 +73,7 @@ angular.module 'mirionlineApp'
 
     .$promise
 
-
-  ###
-  Gets all available info on authenticated user
-
-  @return {Object} user
-  ###
+  # Gets all available info on authenticated user
   getCurrentUser: (callback) ->
     return currentUser if arguments.length is 0
 
@@ -121,10 +88,7 @@ angular.module 'mirionlineApp'
       callback? {}
       {}
 
-
-  ###
-  Waits for currentUser to resolve before checking if user is logged in
-  ###
+  # Waits for currentUser to resolve before checking if user is logged in
   isLoggedIn: (callback) ->
     return currentUser.hasOwnProperty "role" if arguments.length is 0
 
@@ -135,11 +99,7 @@ angular.module 'mirionlineApp'
       callback? is_
       is_
 
-  ###
-  Check if a user is an admin
-
-  @return {Boolean}
-  ###
+  # Check if a user is an admin
   isAdmin: (callback) ->
     return currentUser.role is "admin" if arguments.length is 0
 
@@ -150,9 +110,10 @@ angular.module 'mirionlineApp'
       callback? is_
       is_
 
-
-  ###
-  Get auth token
-  ###
+  # Get auth token
   getToken: ->
     $cookieStore.get 'token'
+
+  # Attach a socket to the user object, for manipulation later
+  attachSocket: (socket) ->
+    currentUser.socket = socket

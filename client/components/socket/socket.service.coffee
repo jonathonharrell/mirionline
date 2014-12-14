@@ -13,5 +13,7 @@ angular.module 'mirionlineApp'
 
   socket = socketFactory ioSocket: ioSocket
 
+  Auth.attachSocket socket
+
   socket: socket
 
