@@ -192,14 +192,15 @@ Tanning/Leatherwork
 
 
 Realms
-  The Miri   - the default world wherein all characters begin.
-  The Shadow - clone of the miri wherein the world is old and ruined. Dark, fog, undead, evil, technology
-  The Birth  - clone of the miri wherein the world is young and wild. Beasts, dragons, magic, fae
-  The Light  - the place where characters go upon death. Instanced puzzle mini-games for resurrection
-  The Chaos  - a realm where the elements roam freely. Elementals, demons, angels, gods
+  The Miri    - the default world wherein all characters begin.
+  The Shadow  - clone of the miri wherein the world is old and ruined. Dark, fog, undead, evil, technology
+  The Birth   - clone of the miri wherein the world is young and wild. Beasts, dragons, magic, fae
+  The Light   - the place where characters go upon death. Instanced puzzle mini-games for resurrection
+  The Chaos   - a realm where the elements roam freely. Elementals, demons, angels, gods
+  The Outside - the tutorial realm. Players start here as new characters and have limited options.
   
   Accessing the other realms:
-  The Miri   is accessed by default at start of game.
+  The Miri   is accessed by default at start of game after introduction in The Outside.
   The Shadow is accessed...
   The Birth  is accessed...
   The Light  is accessed upon player death. You return after completing the puzzle in spirit form and must recover your body to come back.

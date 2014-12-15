@@ -23,6 +23,7 @@ Before next major release bump:
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
  - Specs for account section controllers
  - Retool: Move some client code around so that there are less folders
+ - Sprite directive. Should store sprite positions and replace element with `<div></div>`
 
 #### Bugs
  - n/a
@@ -36,6 +37,7 @@ Before next major release bump:
  - Parralax background for auth views
  - Logo
  - Font
+ - Sprite sheet
 
 #### Thoughts
  - Get e2e tests back in action ? (low priority)
