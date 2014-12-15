@@ -3,7 +3,6 @@ Miri Online
 
 Before next minor release bump:
  - Expand integration tests
- - Character select UI
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -15,14 +14,13 @@ Before next major release bump:
  - Clustering with websockets / other scaling issues
 
 #### Functionality (server side)
- - Start on character select
+ - Start hooking up sockets to game engine
  - Increase spec coverage / integration tests
- - Add "showTutorials" flag to user model (part of joyride)
 
 #### Client stuff
- - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
+ - Add "Joyride" to tutorial users around the play ui unless character has passed tutorials
+ - Character create
  - Specs for account section controllers
- - Retool: Move some client code around so that there are less folders
  - Sprite directive. Should store sprite positions and replace element with `<div></div>`
 
 #### Bugs
@@ -30,7 +28,7 @@ Before next major release bump:
 
 #### Design
  - Color Scheme
- - Character select UI
+ - Character create UI
  - Play UI
 
 #### Assets
