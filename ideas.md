@@ -104,6 +104,10 @@ Fishing
       
   Some methods may recover oceanic "trash" left by other players.
   The ocean contains a table of materials and such that have been left there or destroyed there, and fishing through certain methods may collect those.
+
+  Related status effects: 
+    "Fishy" - You smell fishy. (charisma debuff ?)
+    "Wet"   - You are wet. (resistance to cold debuff)
   
 Diving
   Breathing apparatus quality increases depth. Dive for potential treasure.
