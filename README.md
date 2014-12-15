@@ -2,7 +2,7 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - tbd
+ - Character create ui
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -15,6 +15,7 @@ Before next major release bump:
 
 #### Functionality (server side)
  - Start hooking up sockets to game engine
+   - Game class should be aware of socket list
 
 #### Client stuff
  - Add "Joyride" to tutorial users around the play ui unless character has passed tutorials
