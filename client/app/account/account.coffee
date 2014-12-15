@@ -11,8 +11,9 @@ angular.module 'mirionlineApp'
   .state 'logout',
     url: '/logout?referrer'
     referrer: 'main'
-    controller: ($state, Auth) ->
+    controller: ($state, Auth, socket) ->
       referrer = $state.params.referrer or $state.current.referrer or "main"
+      socket.socket.disconnect()
       Auth.logout()
       $state.go referrer
 

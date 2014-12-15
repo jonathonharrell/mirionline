@@ -2,8 +2,8 @@ Miri Online
 ===========
 
 Before next minor release bump:
- - tbd
- - Fix socket issues on client
+ - Expand integration tests
+ - Character select UI
 
 Before next major release bump:
  - Able to log in, create character, see some amount of UI
@@ -24,10 +24,12 @@ Before next major release bump:
  - Specs for account section controllers
 
 #### Bugs
- - Logging out should disconnect and logging back in again should reconnect to websocket
+ - n/a
 
 #### Design
  - Color Scheme
+ - Character select UI
+ - Play UI
 
 #### Assets
  - Parralax background for auth views
@@ -36,6 +38,7 @@ Before next major release bump:
 
 #### Thoughts
  - Get e2e tests back in action ? (low priority)
+ - Session longevity ?
 
 #### Long Term
  - Add social signup / login (Twitter / Facebook / Google+)

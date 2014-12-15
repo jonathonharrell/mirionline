@@ -22,7 +22,6 @@ angular.module 'mirionlineApp'
 
   # Delete access token and user info
   logout: ->
-    currentUser.socket.disconnect() if currentUser.socket
     $cookieStore.remove 'token'
     currentUser = {}
     return
@@ -113,7 +112,3 @@ angular.module 'mirionlineApp'
   # Get auth token
   getToken: ->
     $cookieStore.get 'token'
-
-  # Attach a socket to the user object, for manipulation later
-  attachSocket: (socket) ->
-    currentUser.socket = socket
