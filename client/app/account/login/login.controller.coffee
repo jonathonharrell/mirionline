@@ -14,7 +14,7 @@ angular.module 'mirionlineApp'
         password: $scope.user.password
 
       .then ->
-        $state.go "main"
+        $state.go "play"
 
       .catch (err) ->
         $scope.errors.other = err.message

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'socketMock', []
-.factory 'socket', ->
+.factory 'socketProvider', ->
   socket:
     connect: ->
 

@@ -20,7 +20,7 @@ angular.module 'mirionlineApp'
 
         .then ->
           # Account created, redirect to home
-          $state.go "main"
+          $state.go "play"
 
         .catch (err) ->
           err = err.data

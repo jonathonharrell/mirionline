@@ -22,6 +22,7 @@ Before next major release bump:
 #### Client stuff
  - Add "Joyride" to tutorial users around the create character unless user has passed tutorials
  - Specs for account section controllers
+ - Retool: Move some client code around so that there are less folders
 
 #### Bugs
  - n/a

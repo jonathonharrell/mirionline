@@ -1,10 +1,10 @@
 'use strict'
 
-describe 'Controller: MainCtrl', ->
+describe 'Controller: PlayCtrl', ->
 
   # load the controller's module
-  beforeEach module 'mirionlineApp' 
-  beforeEach module 'socketMock' 
+  beforeEach module 'mirionlineApp'
+  beforeEach module 'socketMock'
 
   MainCtrl = undefined
   scope = undefined
@@ -12,7 +12,7 @@ describe 'Controller: MainCtrl', ->
   # Initialize the controller and a mock scope
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    MainCtrl = $controller 'MainCtrl',
+    MainCtrl = $controller 'PlayCtrl',
       $scope: scope
 
   it 'should attach a list of things to the scope', ->

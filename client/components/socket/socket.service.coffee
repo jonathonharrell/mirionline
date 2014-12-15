@@ -3,7 +3,7 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.factory 'socket', (socketFactory, Auth) ->
+.factory 'socketProvider', (socketFactory, Auth) ->
 
   # socket.io now auto-configures its connection when we omit a connection url
   ioSocket = io '',
