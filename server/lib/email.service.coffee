@@ -21,8 +21,8 @@ htmlToText    = require("nodemailer-html-to-text").htmlToText
 
 module.exports = (env) ->
   transport = undefined
-  transport = mailer.createTransport sgTransport(sgOptions) if env is "production"
-  transport = mailer.createTransport stubTransport() if env isnt "production"
+  transport = if env is "production" then mailer.createTransport sgTransport(sgOptions)
+  else mailer.createTransport stubTransport()
   transport.use htmlToText()
 
   templateDir = path.join __dirname, "views", "email"
@@ -43,7 +43,7 @@ module.exports = (env) ->
 
     email  =
       to: options.to
-      from: 'no-reply@minimiri.com' # todo move to config file
+      from: config.email.from
       subject: options.subject or 'No Subject'
       html: html
 
