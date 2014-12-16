@@ -288,6 +288,15 @@ Shops/Vendors
 Player Shops/Hired Vendors
 
 
+Magic and Magical Awareness
+
+
+Auras
+
+
+Transformations
+
+
 Auction Houses
 
 
@@ -306,4 +315,6 @@ Update Queue (architecture)
 Locales and Points of Interest
   Nivek's Brothel (promised Kevin I'd have a place in game)
   Dath (character) - ???
-  
+  Watch maker (fancy watches!)
+  Gun maker (fancy guns!)
+  Weapons factory
