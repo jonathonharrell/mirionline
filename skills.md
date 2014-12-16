@@ -1,8 +1,6 @@
 ## Skills brainstorming
 
-This is sort of a master list of all skills and some short descriptions of each
-
-#### Weapons
+This is sort of a master list of all skills we've come across. They may or may not make it into the final version of the game.
 
 - Longsword
 - Shortsword
@@ -14,44 +12,198 @@ This is sort of a master list of all skills and some short descriptions of each
 - Blunt
 - Lance
 - Bow
+- Flail
+- Thrusting weapon (Rapier?)
 - Crossbow
-
-+Offhand stuff:
+- Shotgonn
+- Pistole
+- Cannon
 - Shield
 - Book
-- Ankh or other trinkets
-
-#### Combat style
-
+- Ankh
 - Boxing
 - Brawling
 - Dual-Wielding
 - Bladedancing (dual wield, agility skills)
 - Wrestling: Grappling and subduing, available to all characters at the start
 - (? named martial arts): Different schools might offer different stances and weapon skills
-
-#### Language
-
+- Taming
+- Reading
+- Writing
+- Awareness
+- Perception
+- Whispering: Sort of a telekinetic in-game explanation for player-to-player messaging
 - Language - Shadow: Specific to magic user
 - Language - Common: Available to all characters
 - Language - Elvish
-
-#### Rescource gathering
-
+- Horseriding
+- Dragonriding
 - Mining
 - Woodcutting
-
-#### Resource locating
-
+- Fishing
+- Skinning
+- Hunting
 - Prospecting
-
-#### Crafting
-
 - Smithing
-
-#### other
-
+- Cooking
+- Woodworking
+- Tailoring
+- Fletching
+- Tanning
+- Leatherworking
+- Building
+- Shipwright
 - Tattoo Artist
 - Barber
 - Facepainter
 - Musician (singing/instruments)
+- Diplomacy
+- Bartering
+- First Aid
+- Medicine
+- Herbology
+- Chemistry
+- Alchemy
+- Necromancy
+- Lycanthropy
+- Intimidation
+- Telekensis
+- Illusion
+- Elemental Magic
+- Geomancy
+- Aquamancy
+- Pyromancy
+- Divinity
+- Leadership
+- Assassination
+- Sneaking
+- Pickpocketing
+- Defending
+- Parrying
+- Endurance
+- Strength
+- Agility
+- Charisma
+- Dexterity
+- Vitality
+- Foritude
+- Acrobatics
+- Climbing/Scaling
+- Disguise
+- Survival
+- Swimming
+- Diving
+- Tracking
+- Carpentry
+- Cunning
+- Goncrafting
+- Augmenting
+- Enchanting
+- Chanting
+- Vampirism
+- Sniping
+- Jewelry making
+- Masonry
+- Quarrying
+- Rending
+- Mapmaking
+- Exploration
+- Spelunking
+- Gemcutting
+- Farming
+- Scribing
+- Papercraft
+- Tinkering
+- Watchmaking
+- Inscription
+- Apothocary
+- Dancing
+- Composition
+- Architecture
+- Bowyering
+- Makeup Artistry
+- Painting/Drawing
+- Caligraphy
+- Glassworking
+- Pottery
+- Camping
+- Waxworking
+- Weaving
+- Lockpicking
+- Sleight of Hand
+- Binding (capture and restrain people)
+- Locksmithing
+- Stealth (a bit different from sneaking)
+- Meditation
+- Sailing
+- Ropemaking
+- Mountaineering
+- Engineering
+- Explosives
+- Trapmaking
+- Trap Detection
+- Appraisal
+- Teaching
+- Reflection
+- Witchcraft
+- Piracy
+- Zeal
+- Channeling
+- Lichdom
+- Wizardry
+- Heralding
+- Righteousness
+- Loyalty
+- Worship
+- Favor - (deity name): A measure of your favor from your chosen deity(s)
+- Devotion
+- Attunement - (element): A measure of your attunement with your chosen element, IE Attunement - Nature
+- Druidism
+- Shamanism
+- Faith
+- Mounted Combat
+- Rituals
+- Spellcircles
+- Sorcery
+- Thieving
+- Blood Magic (voodoo)
+- Knowledge
+- Intelligence
+- Wisdom
+- Luck
+- Rune Magic
+- Mysticism
+- Transmutation
+- Demonology
+- Lore - (area of interest): A measure of your knowledge of a particular subject
+- Concoction
+- Swashbuckling
+- Chivalry
+- Forging
+- Tarot
+- Puppetry
+- Crystalism
+- Telepathy
+- Spirituality
+- Kaido
+- Shindo
+- Healing
+- Curses
+- Occultism
+- Winemaking
+- Alcoholism
+- Persuasion
+- Fame
+- Balance
+- Cartography
+- Gambling
+- Torture
+- Bluffing
+- Tactical Fighting
+- Flying
+- Levitating
+- Escaping
+- Knowledge - (skill): Nobility, Arcana, Dungeoneering, Geography, History, Planes, Religion
+- Ferociousness
+- Barbaric
+
