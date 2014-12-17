@@ -206,4 +206,45 @@ This is sort of a master list of all skills we've come across. They may or may n
 - Knowledge - (skill): Nobility, Arcana, Dungeoneering, Geography, History, Planes, Religion
 - Ferociousness
 - Barbaric
+- Siege
+- Sapping
+- Shapeshifting
+- Speed
+- Glamour
+- Archery
+- Marksmanship
+- (type) Armor - Heavy, Light
+- Conjuration
+- Restoration
+- Speechcraft
+- Scanning
+- Bug-catching
+- Soothsaying
+- Beastmastery
+- Incantation
+- Prayer
+- Construction
+- Divination
+- Dungeoneering
+- Analysis
+- Aerodynamics
+- Taxidermy
+- Cryptography
+- Demolition
+- Diagnosis
+- Instruct
+- Negotiate
+- Consecration
+- Concentration
+- Symbols
+- Gadgets
+- Deception
+- Mantra
+- Totems
+- Glyphs
+- Virtue
+- Arcana
+- Steam Engineering
+- Chaos Magic
+- 
 

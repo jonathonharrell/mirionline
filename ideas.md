@@ -309,6 +309,9 @@ Logging Out
 Accounts
 
 
+Rivalries (fight the same player enough you develop a rivalry)
+
+
 Update Queue (architecture)
 
 
