@@ -1,3 +1,37 @@
 h1 Aesthetics
-a(ui-sref='character-create.history') &laquo; Back
-a(ui-sref='character-create.name') Next &raquo;
+h4 Hair
+//- .row
+//-   .col-xs-4
+//-     label
+//-       | Color
+//-       select.form-control(ng-model='character.description.hair.color')
+//-         option(value='blonde') Blonde
+//-         option(value='brown') Brown
+//-         option(value='red') Red
+//-         option(value='black') Black
+//-         option(value='bleach-blonde') Bleach
+//-   .col-xs-4
+//-     label
+//-       | Length
+//-       select.form-control(ng-model='character.description.hair.length')
+//-         option(value='blonde') Bald
+//-         option(value='blonde') Very Short
+//-         option(value='blonde') Short
+//-         option(value='blonde') Shoulder-Length
+//-         option(value='blonde') Long
+//-   .col-xs-4
+//-     label
+//-       | Style
+//-       select.form-control(ng-model='character.description.hair.style')
+//-         option(value='blonde') Blonde
+//-         option(value='blonde') Brown
+//-         option(value='blonde') Red
+//-         option(value='blonde') Black
+//-         option(value='blonde') Bleach
+h4 Face
+h4 Body
+.row
+  .col-xs-12
+    a(ui-sref='character-create.history') &laquo; Back
+    =' | '
+    a(ui-sref='character-create.name') Next &raquo;
