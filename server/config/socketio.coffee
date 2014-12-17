@@ -4,16 +4,7 @@
 
 config = require "./environment"
 
-# When the user disconnects.. perform this
-onDisconnect = (socket) ->
-
-# When the user connects.. perform this
-onConnect = (socket) ->
-  # When the client emits 'info', this listens and executes
-  socket.on "info", (data) ->
-    console.info "[%s] %s", socket.address, JSON.stringify(data, null, 2)
-
-module.exports = (socketio) ->
+module.exports = (socketio, transport) ->
   # socket.io (v1.x.x) is powered by debug.
   # In order to see all the debug output, set DEBUG (in server/config/local.env.js) to including the desired scope.
   #
@@ -34,9 +25,9 @@ module.exports = (socketio) ->
 
     # Call onDisconnect.
     socket.on "disconnect", ->
-      onDisconnect socket
+      transport.disconnect socket
       console.info "[%s] DISCONNECTED", socket.address
 
     # Call onConnect.
-    onConnect socket
+    transport.connect socket
     console.info "[%s] CONNECTED", socket.address

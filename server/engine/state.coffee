@@ -9,6 +9,7 @@ class State
     # if we need to apply a room to the socket or anything else it would be here
 
   handle: (socket, e, data) ->
+    # todo need to be santizing data before passing to method
     # if we need to callback before each call, we would overwrite this method in the state
     this[e]? socket, data
 

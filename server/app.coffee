@@ -25,7 +25,20 @@ socketio = require("socket.io")(server,
   serveClient: (if (config.env is "production") then false else true)
   path: "/socket.io-client"
 )
-require("./config/socketio") socketio
+
+# Init game stuff
+EventEmitter = require("events").EventEmitter
+eventEmitter = new EventEmitter()
+
+Game = require './engine/game'
+game = new Game(eventEmitter)
+
+# communication layer
+Transport = require('./engine/transport')
+transportLayer = new Transport eventEmitter
+game.setTransport transportLayer
+
+require("./config/socketio") socketio, transportLayer
 require("./config/express") app
 require("./config/nodemailer") app
 require("./routes") app

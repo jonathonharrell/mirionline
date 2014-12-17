@@ -6,22 +6,26 @@
 
 'use strict'
 
-Unauthenticated = require "./states/unauthenticated"
+NotInGameState = require "./states/not-in-game"
+InGameState    = require "./states/in-game"
 
 class Transport
   # attach event emitter instance
   constructor: (@eventEmitter) ->
 
   # run on socketio connection
-  socketConnection: (socket) ->
+  connect: (socket) ->
       # handle setting to authenticated if token is passed for connection
-      # socket.state = new Unauthenticated(socket)
+      socket.state = new NotInGameState(socket.decoded_token._id)
       # state should also attach room when necessary (socket.join)
 
       socket.on "msg", (e, data) ->
         eventEmitter.emit("msg", socket, e, data);
 
       @sockets.push socket
+
+  disconnect: (socket) ->
+    # do something with a disconnection (fire an event back to game to wait a certain amount of time and remove them from the players list)
 
   sockets: []
 
