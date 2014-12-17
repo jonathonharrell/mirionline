@@ -1,11 +1,19 @@
 Miri Online
 ===========
 
-Before next minor release bump:
- - Character create ui
+Before next patch release bump:
+ - Start hooking up sockets to game engine
+   - Game class should be aware of socket list
+   - Get character list
+   - Be aware of socket state (IE, character selected, etc)
+   - Early tests for engine
 
-Before next major release bump:
- - Able to log in, create character, see some amount of UI
+Before next minor release bump:
+ - Able to log in, select/create character, see some amount of play UI
+
+Before next major release (1.0):
+ - Miri world done. Core features implemented in a meaningful way. UI done.
+ - RC @ 2.0: Other planes done. Some additional features
 
 ## @todo
 
@@ -14,12 +22,11 @@ Before next major release bump:
  - Clustering with websockets / other scaling issues
 
 #### Functionality (server side)
- - Start hooking up sockets to game engine
-   - Game class should be aware of socket list
+ - Character model
+ - Character creation options sent to client to build form
 
 #### Client stuff
  - Add "Joyride" to tutorial users around the play ui unless character has passed tutorials
- - Character create
  - Specs for account section controllers
  - Sprite directive. Should store sprite positions and replace element with `<div></div>`
 
@@ -28,7 +35,6 @@ Before next major release bump:
 
 #### Design
  - Color Scheme
- - Character create UI
  - Play UI
 
 #### Assets
