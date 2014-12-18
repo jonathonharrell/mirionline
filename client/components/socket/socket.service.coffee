@@ -13,5 +13,9 @@ angular.module 'mirionlineApp'
 
   socket = socketFactory ioSocket: ioSocket
 
+  socket.send = (e, data, callback) -> # two way message (emulate HTTP), useful for certain things
+    socket.emit "msg", e, data
+    socket.on e, callback if callback
+
   socket: socket
 

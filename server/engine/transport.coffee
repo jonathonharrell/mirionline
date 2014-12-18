@@ -7,7 +7,6 @@
 'use strict'
 
 NotInGameState = require "./states/not-in-game"
-InGameState    = require "./states/in-game"
 
 class Transport
   # attach event emitter instance
@@ -19,8 +18,9 @@ class Transport
       socket.state = new NotInGameState(socket.decoded_token._id)
       # state should also attach room when necessary (socket.join)
 
+      self = this
       socket.on "msg", (e, data) ->
-        eventEmitter.emit("msg", socket, e, data);
+        self.eventEmitter.emit("msg", socket, e, data);
 
       @sockets.push socket
 

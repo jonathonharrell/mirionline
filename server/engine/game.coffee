@@ -7,7 +7,6 @@ class Game
   constructor: (@eventEmitter) ->
     @eventEmitter.on "msg", (socket, e, data) ->
       # read socket state, handle inbound message
-      console.info "%s %s", e, data
       socket.state.handle socket, e, data
 
   # attaches transport to the game object for outbound messages

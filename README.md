@@ -3,10 +3,9 @@ Miri Online
 
 Before next patch release bump:
  - Start hooking up sockets to game engine
-   - Game class should be aware of socket list
-   - Get character list
-   - Be aware of socket state (IE, character selected, etc)
+   - Get character list to client
    - Early tests for engine
+ - Character class, should validate and send structure based on lists and rules for properties
 
 Before next minor release bump:
  - Able to log in, select/create character, see some amount of play UI
@@ -22,7 +21,6 @@ Before next major release (1.0):
  - Clustering with websockets / other scaling issues
 
 #### Functionality (server side)
- - Character model
  - Character creation options sent to client to build form
 
 #### Client stuff

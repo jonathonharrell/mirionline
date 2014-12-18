@@ -1,13 +1,13 @@
 section.container-fluid.miri
   section.row.characters
     .col-xs-2
-    .col-xs-4
+    .col-xs-4(ng-repeat="n in range(empty) track by $index")
       h4.text-center Empty
       .panel.panel-default
         .panel-body
           p.text-center
             a.btn.btn-success.btn-lg(ui-sref='character-create.history') Create
-    .col-xs-4
+    .col-xs-4(ng-repeat="character in characters")
       h4.text-center
         | Karthas
         =' '

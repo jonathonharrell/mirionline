@@ -35,6 +35,7 @@ UserSchema = new Schema
     type: Number
     default: 0
     select: false
+  characters: []
 
 # Virtuals
 
