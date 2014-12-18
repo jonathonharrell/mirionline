@@ -1,4 +1,6 @@
 h1 Name
 .form-group
   input.form-control(name='name', ng-model='character.name', placeholder='Character Name')
-a(ui-sref='character-create.aesthetics') &laquo; Back
+a.btn.btn-default(ui-sref='character-create.aesthetics') &laquo; Back
+=' '
+button.btn.btn-success(type='button', ng-click='createCharacter()') Create

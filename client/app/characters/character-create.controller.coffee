@@ -1,10 +1,10 @@
 'use strict'
 
 angular.module 'mirionlineApp'
-.controller 'CharacterCreateCtrl', ($scope, socketProvider, Auth) ->
+.controller 'CharacterCreateCtrl', ($scope, socketProvider) ->
   socketProvider.socket.connect()
   $scope.character = {}
 
   $scope.createCharacter = ->
-    # do something!
+    socketProvider.socket.send "createCharacter", $scope.character
     return

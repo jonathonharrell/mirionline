@@ -14,6 +14,7 @@ angular.module 'mirionlineApp'
     templateUrl: 'app/characters/character-create.html'
     controller: 'CharacterCreateCtrl'
     abstract: true
+    authenticate: true
 
   .state 'character-create.history',
     url: '/history'
