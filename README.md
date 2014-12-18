@@ -2,9 +2,7 @@ Miri Online
 ===========
 
 Before next patch release bump:
- - Start hooking up sockets to game engine
-   - Get character list to client
-   - Early tests for engine
+ - Tests for engine classes
  - Character class, should validate and send structure based on lists and rules for properties
 
 Before next minor release bump:
