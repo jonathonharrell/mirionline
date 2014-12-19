@@ -47,6 +47,10 @@ module.exports = (grunt) ->
         options:
           script: "dist/server/app.coffee"
 
+      namesBrowser:
+        options:
+          script: "tools/names-browser/app.coffee"
+
     open:
       server:
         url: "http://localhost:<%= express.options.port %>"
@@ -754,3 +758,15 @@ module.exports = (grunt) ->
     "test"
     "build"
   ]
+
+  grunt.registerTask "tools", (target) ->
+    if target in ["names", "name", "name-browser"]
+      grunt.task.run [
+        "express:namesBrowser"
+        "wait"
+        "open"
+        "express-keepalive"
+      ]
+    else
+      return
+
