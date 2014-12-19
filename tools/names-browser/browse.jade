@@ -92,6 +92,11 @@ html(ng-app='nameApp')
               | Female:
               =' '
               span.text-muted {{generated.female}}
+          .form-group
+            h4 Counts
+            p.text-muted Male: {{names.first.male.length}}
+            p.text-muted Female: {{names.first.female.length}}
+            p.text-muted Surnames: {{names.last.length}}
         .col-xs-8
           ul.list-inline
             li(ng-repeat='name in list | filter:nameFilter | orderBy: -name')
