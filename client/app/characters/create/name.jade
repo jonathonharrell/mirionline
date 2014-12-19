@@ -12,7 +12,12 @@
       a.pull-right(ng-show='firstNameLocked', ng-click='toggleLock("firstName")', href='#')
         i.fa-lock.fa
     p
-      | Surname: {{character.surname}}
+      | Surname
+      =' '
+      a.text-info(href='#', tooltip='Surnames may not show depending on your selected background/history.', tooltip-placement='left')
+        i.fa.fa-question-circle
+      | :
+      |  {{character.surname}}
       a.pull-right(ng-hide='surnameLocked', ng-click='toggleLock("surname")', href='#')
         i.fa-unlock.fa
       a.pull-right(ng-show='surnameLocked', ng-click='toggleLock("surname")', href='#')
