@@ -1,6 +1,26 @@
-h1 Name
-.form-group
-  input.form-control(name='name', ng-model='character.name', placeholder='Character Name')
-a.btn.btn-default(ui-sref='character-create.aesthetics') &laquo; Back
-=' '
-button.btn.btn-success(type='button', ng-click='createCharacter()') Create
+.row
+  .col-xs-12
+    h1 Name
+    p.text-muted
+      | Here we'll have a little blurb about how to submit name suggestions. And the reasons
+      | we want to keep it to a generator.
+
+    p
+      | First: {{character.firstName}}
+      a.pull-right(ng-hide='firstNameLocked', ng-click='toggleLock("firstName")', href='#')
+        i.fa-unlock.fa
+      a.pull-right(ng-show='firstNameLocked', ng-click='toggleLock("firstName")', href='#')
+        i.fa-lock.fa
+    p
+      | Surname: {{character.surname}}
+      a.pull-right(ng-hide='surnameLocked', ng-click='toggleLock("surname")', href='#')
+        i.fa-unlock.fa
+      a.pull-right(ng-show='surnameLocked', ng-click='toggleLock("surname")', href='#')
+        i.fa-lock.fa
+    .form-group
+      a.btn.btn-primary(ng-click='generateName()') Generate Name
+.row
+  .col-xs-12
+    a.btn.btn-default(ui-sref='character-create.aesthetics') &laquo; Back
+    =' '
+    button.btn.btn-success(type='button', ng-click='createCharacter()') Create

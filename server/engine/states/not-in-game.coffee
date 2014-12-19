@@ -2,6 +2,7 @@
 
 State = require "../state"
 User  = require "../../api/user/user.model"
+characterStruct = require "../structs/character"
 
 class NotInGameState extends State
 
@@ -19,23 +20,22 @@ class NotInGameState extends State
     # todo need to make sure there isn't a race condition with the query promise in the constructor
     socket.emit "getCharacters", @player.characters
 
-  createCharacter: (socket, data) ->
+  createCharacter: (socket, character) ->
     # validate data, then pass to select character to handle state transition
-    console.log data
+
+    # validations:
+    # character.name (or other fields) must be present and must exist in the corresponding enum
+    unless @player.characters.length < 2
+      socket.emit "createCharacter", { error: "You already have the maximum number of characters." }
+    console.log character
 
   selectCharacter: (socket, data) ->
     # validate data is correct character for user
     # transition to InGameState, provide user and selected character to constructor
 
   characterOptions: (socket) ->
+    socket.emit "characterOptions", characterStruct
     # generate a list of character creation options for the client to use to generate a
     # character creation form
-
-  getName: (socket, data) ->
-    # generate a name for a character based on male or female and first or surname
-    # todo
-    socket.emit "character-create.name", "TestName"
-
-  # potentially accept name suggestions, or perform autocomplete
 
 module.exports = NotInGameState

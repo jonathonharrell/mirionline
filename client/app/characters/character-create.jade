@@ -12,7 +12,8 @@ section.container-fluid.miri
         .panel-body
           h5
             | Name
-            small {{' ' + character.name}}
+            span.text-muted {{' ' + character.firstName + ' ' + character.surname}}
+          pre {{character}}
           h5 History
           p Short history
           h5 Description

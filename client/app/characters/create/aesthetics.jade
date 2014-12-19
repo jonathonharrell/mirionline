@@ -1,4 +1,9 @@
 h1 Appearance
+h4 Gender
+.row
+  .col-xs-12
+    .form-group
+      select.form-control(ng-model='character.gender', ng-options='v for v in struct.gender.options')
 h4 Hair
 h4 Face
 h4 Body

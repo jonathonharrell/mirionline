@@ -39,6 +39,9 @@ Before next major release (1.0):
  - Font
  - Sprite sheet
 
+#### Tools
+ - First tool: Easily edit character creation options and descriptions
+
 #### Thoughts
  - Get e2e tests back in action ? (low priority)
  - Session longevity ?
