@@ -1,0 +1,135 @@
+doctype
+html(ng-app='nameApp')
+  head
+    title Miri Online Aesthetics Editor
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
+    style.
+      .list-inline li { margin: 10px }
+      .remove { color: red; cursor: pointer }
+    script(src='https://code.jquery.com/jquery-2.1.3.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.min.js')
+    script.
+      var app = angular.module('nameApp', []);
+
+      app.controller('MainCtrl', function ($scope, $http, $timeout) {
+        $scope.data = JSON.parse($("#data").html());
+        $scope.cosmetics = JSON.parse($("#cosmetic").html());
+        $scope.editing = "races";
+
+        Object.keys($scope.data).forEach(function (val) {
+          if (!$scope.cosmetics[val]) {
+            $scope.cosmetics[val] = {
+              hair: {
+                type: {},
+                color: []
+              },
+              body: {
+                type: {},
+                color: [],
+                detail: {}
+              },
+              face: {
+                type: {},
+                detail: {},
+                eyes: {
+                  color: [],
+                  type: {}
+                }
+              }
+            };
+          }
+        });
+
+        $scope.renderPreview = function () {
+          $scope.preview = angular.toJson($scope.cosmetics, true);
+        };
+
+        $scope.$watch('cosmetics', function () {
+          $scope.renderPreview();
+          console.log($scope.preview);
+        }, true);
+
+        $scope.selectRace = function (race) {
+          $scope.selectedRace = race;
+          if ($scope.selectedGender) {
+            $scope.editing = "cosmetics";
+          }
+        };
+
+        $scope.selectGender = function (gender) {
+          $scope.selectedGender = gender;
+          if ($scope.selectedRace) {
+            $scope.editing = "cosmetics";
+          }
+        };
+
+        $scope.save = function () {
+          $http.post("/save", $scope.cosmetics)
+          .success(function() {
+            $scope.message = 'Successfully saved character creation data.';
+            $timeout(function () {
+              $scope.message = '';
+            }, 2000);
+          });
+        };
+      });
+  body
+    .hide#data=JSON.stringify(data)
+    .hide#cosmetic=JSON.stringify(cosmetics)
+    .container
+      .row
+        .col-xs-2
+        .col-xs-8
+          h3.text-center Miri Online Tool Suite - Appearance Options
+          p.text-center.text-muted
+            | This tool allows adding, editing and removing appearance options to character creation.
+      span(ng-controller='MainCtrl')
+          span(ng-show='editing === "races"')
+            .col-xs-12
+              h4
+                | Select a Race and Gender
+                small.text-muted &nbsp; {{selectedRace}} {{selectedGender}}
+            .col-xs-3
+            .col-xs-6
+              table.table
+                thead
+                  th Name
+                  th(width="33%") Genders
+                tbody
+                  tr(ng-repeat='(race, detail) in cosmetics')
+                    td
+                      a(href="", ng-click="selectRace(race)") {{race}}
+                    td
+                      a(href="", ng-click="selectGender('Male')") Male
+                      =" "
+                      a(href="", ng-click="selectGender('Female')") Female
+                      =" "
+                      a(href="", ng-click="selectGender('Unisex')") Both
+
+          span(ng-show='editing === "cosmetics"')
+            .col-xs-2
+              a(href="", ng-click="editing = 'races'")
+                i.fa-arrow-left.fa
+                | &nbsp; Back
+            .col-xs-10
+              h4
+                | Appearance Options for {{selectedRace}} {{selectedGender}}
+            .col-xs-6
+              table.table
+                thead
+                  th Name
+                  th(width="33%") Options
+                tbody
+                  tr(ng-repeat='(st, detail) in data[selectedRace].factions')
+                    td {{faction}}
+          .row
+            .col-xs-12.end
+              hr
+              p.help-block {{message}}
+              button.btn.btn-success(ng-click="save()") Save
+          .row
+            .col-xs-12
+              hr
+              pre {{preview}}

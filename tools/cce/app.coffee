@@ -8,6 +8,7 @@ express    = require "express"
 bodyParser = require "body-parser"
 fs         = require "fs"
 path       = require "path"
+mkdirp     = require "mkdirp"
 
 app = express()
 server = require("http").createServer(app)
@@ -19,17 +20,25 @@ app.use bodyParser.urlencoded({ extended: false })
 app.use bodyParser.json()
 
 app.route("/").get (req, res) ->
-  dataPath = path.normalize __dirname + "/../../.data/names.json"
+  dataPath = path.normalize __dirname + "/../../.data/character-creation/data.json"
+  namesPath = path.normalize __dirname + "/../../.data/names.json"
   fs.readFile dataPath, (err, data) ->
-    data = JSON.parse data
-    res.render "browse", {names: data.names}
+    fs.readFile namesPath, (err, names) ->
+      data = JSON.parse data
+      names = JSON.parse names
+      res.render "main", {data: data, names: names}
 
 app.route("/save").post (req, res, next) ->
-  content = JSON.stringify { names: req.body }
-  dataPath = path.normalize __dirname + "/../../.data/names.json"
-  fs.writeFile dataPath, content, (err) ->
-    console.log err if err
-    res.status(204).end()
+  # race: { genders: {
+  # "male": { "noble": { names: { "first": [], "titles": [] } } }
+  # }. description: "", locked: false, "anotherkey":"whatever" }
+
+  data = JSON.stringify req.body, null, 2
+  dataPath = path.normalize __dirname + "/../../.data/character-creation"
+  mkdirp dataPath, (err) ->
+    fs.writeFile dataPath + "/data.json", data, (err) ->
+      console.error err if err
+      res.status(204).end()
 
 startServer = ->
   server.listen 9000, '127.0.0.1', ->

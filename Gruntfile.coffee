@@ -47,9 +47,13 @@ module.exports = (grunt) ->
         options:
           script: "dist/server/app.coffee"
 
-      namesBrowser:
+      cce:
         options:
-          script: "tools/names-browser/app.coffee"
+          script: "tools/cce/app.coffee"
+
+      cosmetic:
+        options:
+          script: "tools/cosmetic/app.coffee"
 
     open:
       server:
@@ -760,9 +764,16 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask "tools", (target) ->
-    if target in ["names", "name", "name-browser"]
+    if target in ["cce", "cc", "character-creation-editor"]
       grunt.task.run [
-        "express:namesBrowser"
+        "express:cce"
+        "wait"
+        "open"
+        "express-keepalive"
+      ]
+    else if target in ["cosmetic", "aesthetic", "appearance"]
+      grunt.task.run [
+        "express:cosmetic"
         "wait"
         "open"
         "express-keepalive"

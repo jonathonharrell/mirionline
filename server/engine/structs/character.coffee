@@ -15,5 +15,32 @@ CharacterStruct =
     options: names.last
   gender:
     options: ["male", "female"]
+  hair: # todo, pull from hair-colors.json where source includes natural (as dyes can provide other colors)
+    color:
+      options: [
+        "black",
+        "dark brown",
+        "chestnut",
+        "auburn",
+        "copper",
+        "red",
+        "strawberry",
+        "light blonde",
+        "dark blonde",
+        "golden blonde",
+        "grey",
+        "white"
+      ]
+    style: # todo pull from hair-styles.json where source includes natural (as barbers can provide new styles)
+      options: [
+        male: [
+          "textured"
+          "bald"
+        ]
+        female: [
+          "textured"
+          "bald"
+        ]
+      ]
 
 module.exports = exports = CharacterStruct

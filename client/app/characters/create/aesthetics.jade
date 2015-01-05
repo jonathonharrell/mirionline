@@ -4,7 +4,15 @@ h4 Gender
   .col-xs-12
     .form-group
       select.form-control(ng-model='character.gender', ng-options='v for v in struct.gender.options')
-h4 Hair
+.row
+  .col-xs-12
+    h4 Hair
+    p.text-muted
+      | Note that not all hair colors and styles are represented here.
+      | Some may be accessed throughout the game in various professions or other means.
+  .col-xs-4
+    .form-group
+      select.form-control(ng-model='character.hair.color', ng-options='v for v in struct.hair.color.options')
 h4 Face
 h4 Body
 .row

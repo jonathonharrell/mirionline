@@ -1,0 +1,34 @@
+{
+  "Human": {
+    "locked": false,
+    "description": "Description.",
+    "factions": {
+      "Eldorei": {
+        "description": "test",
+        "locked": false,
+        "backgrounds": {
+          "Wealthy": {
+            "description": "",
+            "genders": {
+              "Male": {
+                "titles": {
+                  "before": [],
+                  "after": [],
+                  "middle": []
+                }
+              },
+              "Female": {
+                "titles": {
+                  "before": [],
+                  "after": [],
+                  "middle": []
+                }
+              }
+            },
+            "locked": false
+          }
+        }
+      }
+    }
+  }
+}

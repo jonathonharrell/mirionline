@@ -1,0 +1,21 @@
+{
+  "Human": {
+    "hair": {
+      "type": {},
+      "color": []
+    },
+    "body": {
+      "type": {},
+      "color": [],
+      "detail": {}
+    },
+    "face": {
+      "type": {},
+      "detail": {},
+      "eyes": {
+        "color": [],
+        "type": {}
+      }
+    }
+  }
+}

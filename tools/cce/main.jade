@@ -1,0 +1,348 @@
+doctype
+html(ng-app='nameApp')
+  head
+    title Miri Online Name Editor
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
+    style.
+      .list-inline li { margin: 10px }
+      .remove { color: red; cursor: pointer }
+    script(src='https://code.jquery.com/jquery-2.1.3.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.7/angular.min.js')
+    script.
+      var app = angular.module('nameApp', []);
+
+      app.controller('MainCtrl', function ($scope, $http, $timeout) {
+        $scope.data = JSON.parse($("#data").html());
+        $scope.names = JSON.parse($("#names").html()).names;
+        $scope.editing = "races";
+        $scope.preview = angular.toJson($scope.data, true);
+
+        $scope.renderPreview = function () {
+          $scope.preview = angular.toJson($scope.data, true);
+        };
+
+        $scope.$watch('data', function () {
+          $scope.renderPreview();
+        }, true);
+
+        $scope.selectRace = function (race) {
+          $scope.selectedRace = race;
+        };
+
+        $scope.addRace = function () {
+          $scope.data[$scope.newRace] = {locked: true, description: "Description.", factions: {}}; // defaults
+          $scope.newRace = ''; // clear the input field
+        };
+
+        $scope.removeRace = function (race) {
+          delete $scope.data[race];
+        };
+
+        $scope.editFactions = function (race) {
+          $scope.selectRace(race);
+          $scope.editing = 'factions';
+        };
+
+        $scope.selectFaction = function (faction) {
+          $scope.selectedFaction = faction;
+        };
+
+        $scope.addFaction = function () {
+          $scope.data[$scope.selectedRace].factions[$scope.newFaction] = {description: "test", locked: true, backgrounds: {}};
+          $scope.newFaction = '';
+        };
+
+        $scope.removeFaction = function (faction) {
+          delete $scope.data[$scope.selectedRace].factions[faction];
+        };
+
+        $scope.editBackgrounds = function (faction) {
+          $scope.selectFaction(faction);
+          $scope.editing = 'backgrounds';
+        };
+
+        $scope.selectBackground = function (background) {
+          $scope.selectedBackground = background;
+        };
+
+        $scope.addBackground = function () {
+          $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.newBackground] = {
+            description: "",
+            genders: {
+              Male: { titles: { before: [], after: [], middle: [] } },
+              Female: { titles: { before: [], after: [], middle: [] } }
+            },
+            locked: true
+          };
+          $scope.newBackground = '';
+        };
+
+        $scope.removeBackground = function (background) {
+          delete $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[background];
+        };
+
+        $scope.editGenders = function (background) {
+          $scope.selectedBackground = background;
+          $scope.editing = 'genders';
+        };
+
+        $scope.removeGender = function (gender) {
+          delete $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[gender];
+        };
+
+        $scope.addGender = function () {
+          $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.newGender] = {
+            titles: { before: [], after: [], middle: [] }
+          };
+        };
+
+        $scope.editFinal = function (gender) {
+          $scope.selectedGender = gender;
+          $scope.editing = 'final';
+        };
+
+        $scope.addTitle = function () {
+          $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles[$scope.titleCat].push($scope.newTitle);
+          $scope.newTitle = '';
+        };
+
+        $scope.removeTitle = function (cat, title) {
+          var i = $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles[cat].indexOf(title);
+          $scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles[cat].splice(i, 1);
+        };
+
+        $scope.generateName = function () {
+          var prefix = _.sample($scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles.before) || '';
+          var middle = _.sample($scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles.middle) || '';
+          var post   = _.sample($scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles.after)  || '';
+          var first = _.sample($scope.names.first[$scope.selectedGender.toLowerCase()]);
+          var last  = _.sample($scope.names.last);
+          $scope.generated = prefix + " " + first + " " + middle + " " + last + " " + post;
+        };
+
+        $scope.save = function () {
+          $http.post("/save", $scope.data)
+          .success(function() {
+            $scope.message = 'Successfully saved character creation data.';
+            $timeout(function () {
+              $scope.message = '';
+            }, 2000);
+          });
+        };
+      });
+  body
+    .hide#data=JSON.stringify(data)
+    .hide#names=JSON.stringify(names)
+    .container
+      .row
+        .col-xs-2
+        .col-xs-8
+          h3.text-center Miri Online Tool Suite - Character Creation
+          p.text-center.text-muted
+            | This tool allows adding, editing and removing races, factions, backgrounds, genders and titles
+            | from the allotted pool for character creation. Do <code>grunt tools:cosmetic</code> for
+            | aesthetic options.
+      span(ng-controller='MainCtrl')
+        .row
+          span(ng-show='editing === "final"')
+            .col-xs-12
+              h4
+                | Titles for {{selectedFaction}} {{selectedRace}} {{selectedGender}} - {{selectedBackground}}
+              h5 Titles
+            .col-xs-4
+              .form-group
+                a(href='#', ng-click='editing = "genders"')
+                  i.fa.fa-arrow-left
+                  | &nbsp; Back
+              .form-group
+                label
+                  input.form-control(ng-model='newTitle', placeholder='add a title')
+              .form-group
+                label
+                  select.form-control(ng-model="titleCat")
+                    option(value='') add
+                    option(ng-repeat='(type, list) in data[selectedRace].factions[selectedFaction].backgrounds[selectedBackground].genders[selectedGender].titles', value="{{type}}") {{type}}
+              .form-group
+                button.btn.btn-success(ng-click='addTitle()') Add
+              .form-group
+                button.btn.btn-primary(ng-click='generateName()') Generate Name
+              .form-group
+                h4
+                  span.text-muted {{generated}}
+            .col-xs-8
+              ul.list-unstyled(ng-repeat='(type, list) in data[selectedRace].factions[selectedFaction].backgrounds[selectedBackground].genders[selectedGender].titles')
+                li
+                  ul.list-inline
+                    li(ng-repeat='title in list')
+                      {{title}}
+                      a(href="", ng-click="removeTitle(type, title)", style="color: red; padding: 4px") X
+
+
+          span(ng-show='editing === "races"')
+            .col-xs-12
+              h4
+                | Races
+                small &nbsp; {{selectedRace}}
+            .col-xs-4
+              table.table
+                thead
+                  th Name
+                  th(width="33%") Options
+                tbody
+                  tr(ng-repeat='(race, detail) in data')
+                    td {{race}}
+                    td
+                      a(ng-hide='detail.locked', ng-click='detail.locked = !detail.locked', href='')
+                        i.fa-unlock.fa
+                      a(ng-show='detail.locked', ng-click='detail.locked = !detail.locked', href='')
+                        i.fa-lock.fa
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href='', ng-click="selectRace(race)")
+                        i.fa.fa-file-text
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="editFactions(race)")
+                        i.fa.fa-pencil
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="removeRace(race)")
+                        i.fa.fa-close
+              hr
+              .form-group
+                label New Race
+                input.form-control(ng-model="newRace", placeholder='add a race')
+              .form-group
+                button.btn.btn-primary(ng-click="addRace()") Add
+            .col-xs-8
+              .form-group
+                label Description
+                textarea.form-control(ng-model='data[selectedRace].description', style="min-height:200px")
+
+
+          span(ng-show='editing === "factions"')
+            .col-xs-12
+              h4
+                | Factions for {{selectedRace}}
+                small &nbsp; {{selectedFaction}}
+            .col-xs-2
+              a(href="", ng-click="editing = 'races'")
+                i.fa-arrow-left.fa
+                | &nbsp; Back
+            .col-xs-4
+              table.table
+                thead
+                  th Name
+                  th(width="33%") Options
+                tbody
+                  tr(ng-repeat='(faction, detail) in data[selectedRace].factions')
+                    td {{faction}}
+                    td
+                      a(ng-hide='detail.locked', ng-click='detail.locked = !detail.locked', href='')
+                        i.fa-unlock.fa
+                      a(ng-show='detail.locked', ng-click='detail.locked = !detail.locked', href='')
+                        i.fa-lock.fa
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href='', ng-click="selectFaction(faction)")
+                        i.fa.fa-file-text
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="editBackgrounds(faction)")
+                        i.fa.fa-pencil
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="removeFaction(faction)")
+                        i.fa.fa-close
+              hr
+              .form-group
+                label New Faction
+                input.form-control(ng-model="newFaction", placeholder='add a faction')
+              .form-group
+                button.btn.btn-primary(ng-click="addFaction()") Add
+            .col-xs-6
+              .form-group
+                label Description
+                textarea.form-control(ng-model='data[selectedRace].factions[selectedFaction].description', style="min-height:200px")
+
+
+          span(ng-show='editing === "backgrounds"')
+            .col-xs-12
+              h4
+                | Backgrounds for {{selectedFaction}} {{selectedRace}}
+                small &nbsp; {{selectedBackground}}
+            .col-xs-2
+              a(href="", ng-click="editing = 'factions'")
+                i.fa-arrow-left.fa
+                | &nbsp; Back
+            .col-xs-4
+              table.table
+                thead
+                  th Name
+                  th(width="33%") Options
+                tbody
+                  tr(ng-repeat='(bg, detail) in data[selectedRace].factions[selectedFaction].backgrounds')
+                    td {{bg}}
+                    td
+                      a(ng-hide='detail.locked', ng-click='detail.locked = !detail.locked', href='')
+                        i.fa-unlock.fa
+                      a(ng-show='detail.locked', ng-click='detail.locked = !detail.locked', href='')
+                        i.fa-lock.fa
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href='', ng-click="selectBackground(bg)")
+                        i.fa.fa-file-text
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="editGenders(bg)")
+                        i.fa.fa-pencil
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="removeBackground(bg)")
+                        i.fa.fa-close
+              hr
+              .form-group
+                label New Background
+                input.form-control(ng-model="newBackground", placeholder='add a background')
+              .form-group
+                button.btn.btn-primary(ng-click="addBackground()") Add
+            .col-xs-6
+              .form-group
+                label Description
+                textarea.form-control(ng-model='data[selectedRace].factions[selectedFaction].backgrounds[selectedBackground].description', style="min-height:200px")
+
+
+
+          span(ng-show='editing === "genders"')
+            .col-xs-12
+              h4
+                | Genders for {{selectedFaction}} {{selectedRace}} {{selectedBackground}}
+                small &nbsp; {{selectedGender}}
+            .col-xs-3
+              a(href="", ng-click="editing = 'factions'")
+                i.fa-arrow-left.fa
+                | &nbsp; Back
+            .col-xs-6
+              table.table
+                thead
+                  th Name
+                  th(width="33%") Options
+                tbody
+                  tr(ng-repeat='(gender, detail) in data[selectedRace].factions[selectedFaction].backgrounds[selectedBackground].genders')
+                    td {{gender}}
+                    td
+                      a(href="", ng-click="editFinal(gender)")
+                        i.fa.fa-pencil
+                      | &nbsp;&nbsp;&nbsp;
+                      a(href="", ng-click="removeGender(gender)")
+                        i.fa.fa-close
+              hr
+              .form-group
+                label New Gender
+                input.form-control(ng-model="newGender", placeholder='add another gender')
+              .form-group
+                button.btn.btn-primary(ng-click="addGender()") Add
+
+
+        .row
+          .col-xs-12.end
+            hr
+            p.help-block {{message}}
+            button.btn.btn-success(ng-click="save()") Save
+        .row
+          .col-xs-12
+            hr
+            pre {{preview}}
