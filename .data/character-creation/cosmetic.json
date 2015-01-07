@@ -1,20 +1,60 @@
 {
   "Human": {
-    "hair": {
-      "type": {},
-      "color": []
-    },
-    "body": {
-      "type": {},
-      "color": [],
-      "detail": {}
-    },
-    "face": {
-      "type": {},
-      "detail": {},
-      "eyes": {
+    "Male": {
+      "hair": {
+        "type": {},
+        "color": []
+      },
+      "body": {
+        "type": {},
         "color": [],
-        "type": {}
+        "detail": {}
+      },
+      "face": {
+        "type": {},
+        "detail": {},
+        "eyes": {
+          "color": [],
+          "type": {}
+        }
+      }
+    },
+    "Female": {
+      "hair": {
+        "type": {},
+        "color": []
+      },
+      "body": {
+        "type": {},
+        "color": [],
+        "detail": {}
+      },
+      "face": {
+        "type": {},
+        "detail": {},
+        "eyes": {
+          "color": [],
+          "type": {}
+        }
+      }
+    },
+    "Unisex": {
+      "hair": {
+        "type": {},
+        "color": []
+      },
+      "body": {
+        "type": {},
+        "color": [],
+        "detail": {}
+      },
+      "face": {
+        "type": {},
+        "detail": {},
+        "eyes": {
+          "color": [],
+          "type": {}
+        }
       }
     }
   }

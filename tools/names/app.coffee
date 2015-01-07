@@ -21,22 +21,23 @@ app.use bodyParser.json()
 
 app.route("/").get (req, res) ->
   dataPath = path.normalize __dirname + "/../../.data/character-creation/data.json"
-  namesPath = path.normalize __dirname + "/../../.data/character-creation/names.json"
+  namePath = path.normalize __dirname + "/../../.data/character-creation/names.json"
   fs.readFile dataPath, (err, data) ->
-    fs.readFile namesPath, (err, names) ->
-      data = JSON.parse data
-      names = JSON.parse names
-      res.render "main", {data: data, names: names}
+    fs.readFile namePath, (err, names) ->
+      res.render "main", {data: JSON.parse(data), names: JSON.parse(names)}
 
 app.route("/save").post (req, res, next) ->
-  # race: { genders: {
-  # "male": { "noble": { names: { "first": [], "titles": [] } } }
-  # }. description: "", locked: false, "anotherkey":"whatever" }
+  # example =
+  #   human:
+  #     male:     []
+  #     female:   []
+  #     unisex:   []
+  #     surnames: []
 
   data = JSON.stringify req.body, null, 2
   dataPath = path.normalize __dirname + "/../../.data/character-creation"
   mkdirp dataPath, (err) ->
-    fs.writeFile dataPath + "/data.json", data, (err) ->
+    fs.writeFile dataPath + "/names.json", data, (err) ->
       console.error err if err
       res.status(204).end()
 

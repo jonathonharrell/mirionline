@@ -12,14 +12,20 @@
             "genders": {
               "Male": {
                 "titles": {
-                  "before": [],
+                  "before": [
+                    "Mister",
+                    ""
+                  ],
                   "after": [],
                   "middle": []
                 }
               },
               "Female": {
                 "titles": {
-                  "before": [],
+                  "before": [
+                    "Miss",
+                    ""
+                  ],
                   "after": [],
                   "middle": []
                 }

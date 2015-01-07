@@ -4,7 +4,7 @@ Miri Online
 Before next patch release bump:
  - Tests for engine classes
  - Character class, should validate and send structure based on lists and rules for properties
- - Rename names tool to character creation setup tool
+ - Appearance editor fleshed out
 
 Before next minor release bump:
  - Able to log in, select/create character, see some amount of play UI

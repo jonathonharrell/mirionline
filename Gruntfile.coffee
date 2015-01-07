@@ -55,6 +55,10 @@ module.exports = (grunt) ->
         options:
           script: "tools/cosmetic/app.coffee"
 
+      names:
+        options:
+          script: "tools/names/app.coffee"
+
     open:
       server:
         url: "http://localhost:<%= express.options.port %>"
@@ -774,6 +778,13 @@ module.exports = (grunt) ->
     else if target in ["cosmetic", "aesthetic", "appearance"]
       grunt.task.run [
         "express:cosmetic"
+        "wait"
+        "open"
+        "express-keepalive"
+      ]
+    else if target in ["name", "names", "name-editor", "ne"]
+      grunt.task.run [
+        "express:names"
         "wait"
         "open"
         "express-keepalive"

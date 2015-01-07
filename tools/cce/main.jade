@@ -15,7 +15,7 @@ html(ng-app='nameApp')
 
       app.controller('MainCtrl', function ($scope, $http, $timeout) {
         $scope.data = JSON.parse($("#data").html());
-        $scope.names = JSON.parse($("#names").html()).names;
+        $scope.names = JSON.parse($("#names").html());
         $scope.editing = "races";
         $scope.preview = angular.toJson($scope.data, true);
 
@@ -114,11 +114,14 @@ html(ng-app='nameApp')
         };
 
         $scope.generateName = function () {
+          var firstNames = _.union($scope.names[$scope.selectedRace][$scope.selectedGender],
+              $scope.names[$scope.selectedRace].Unisex);
+
           var prefix = _.sample($scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles.before) || '';
           var middle = _.sample($scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles.middle) || '';
           var post   = _.sample($scope.data[$scope.selectedRace].factions[$scope.selectedFaction].backgrounds[$scope.selectedBackground].genders[$scope.selectedGender].titles.after)  || '';
-          var first = _.sample($scope.names.first[$scope.selectedGender.toLowerCase()]);
-          var last  = _.sample($scope.names.last);
+          var first = _.sample(firstNames);
+          var last  = _.sample($scope.names[$scope.selectedRace].Surnames);
           $scope.generated = prefix + " " + first + " " + middle + " " + last + " " + post;
         };
 

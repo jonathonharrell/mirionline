@@ -21,21 +21,61 @@ html(ng-app='nameApp')
         Object.keys($scope.data).forEach(function (val) {
           if (!$scope.cosmetics[val]) {
             $scope.cosmetics[val] = {
-              hair: {
-                type: {},
-                color: []
-              },
-              body: {
-                type: {},
-                color: [],
-                detail: {}
-              },
-              face: {
-                type: {},
-                detail: {},
-                eyes: {
+              Male: {
+                hair: {
+                  type: {},
+                  color: []
+                },
+                body: {
+                  type: {},
                   color: [],
-                  type: {}
+                  detail: {}
+                },
+                face: {
+                  type: {},
+                  detail: {},
+                  eyes: {
+                    color: [],
+                    type: {}
+                  }
+                }
+              },
+              Female: {
+                hair: {
+                  type: {},
+                  color: []
+                },
+                body: {
+                  type: {},
+                  color: [],
+                  detail: {}
+                },
+                face: {
+                  type: {},
+                  detail: {},
+                  eyes: {
+                    color: [],
+                    type: {}
+                  }
+                }
+              },
+              Unisex: {
+                hair: {
+                  type: {},
+                  color: []
+                },
+                body: {
+                  type: {},
+                  color: [],
+                  detail: {}
+                },
+                face: {
+                  type: {},
+                  detail: {},
+                  eyes: {
+                    color: [],
+                    type: {}
+                  }
                 }
               }
             };
@@ -63,6 +103,18 @@ html(ng-app='nameApp')
           if ($scope.selectedRace) {
             $scope.editing = "cosmetics";
           }
+        };
+
+        $scope.unselect = function () {
+          $scope.selectedGender = undefined;
+          $scope.selectedRace = undefined;
+          $scope.editing = "races";
+        };
+
+        $scope.addHairStyle = function () {
+          $scope.cosmetics[$scope.selectedRace][$scope.selectedGender]
+            .hair.type[$scope.newHairStyle] = $scope.newHairStyleDescription;
+          $scope.newHairStyleDescription = $scope.newHairStyle = '';
         };
 
         $scope.save = function () {
@@ -110,20 +162,32 @@ html(ng-app='nameApp')
 
           span(ng-show='editing === "cosmetics"')
             .col-xs-2
-              a(href="", ng-click="editing = 'races'")
+              a(href="", ng-click="unselect()")
                 i.fa-arrow-left.fa
                 | &nbsp; Back
             .col-xs-10
               h4
                 | Appearance Options for {{selectedRace}} {{selectedGender}}
             .col-xs-6
+              h5 Hair Style
               table.table
                 thead
                   th Name
-                  th(width="33%") Options
+                  th Description
                 tbody
-                  tr(ng-repeat='(st, detail) in data[selectedRace].factions')
-                    td {{faction}}
+                  tr(ng-repeat='(style, desc) in cosmetics[selectedRace][selectedGender].hair.type')
+                    td
+                      input.form-control(ng-model="style")
+                      a(href="", ng-click="comsetics[selectedRace][selectedGender].hair.type[style] = undefined", style="color:red;padding:4px") X
+                    td
+                      textarea.form-control(ng-model="desc")
+                  tr
+                    td
+                      input.form-control(ng-model="newHairStyle")
+                      button.btn.btn-success.btn-sm(ng-click="addHairStyle()") Save
+                    td
+                      textarea.form-control(ng-model="newHairStyleDescription")
+
           .row
             .col-xs-12.end
               hr
